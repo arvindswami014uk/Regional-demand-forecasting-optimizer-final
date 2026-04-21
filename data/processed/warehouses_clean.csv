@@ -1,0 +1,6 @@
+warehouse_id,region,capacity_units,fixed_daily_cost_usd
+WH-NORTH,North,120000,1800
+WH-SOUTH,South,115000,1700
+WH-EAST,East,118000,1750
+WH-WEST,West,110000,1680
+WH-CENTRAL,Central,180000,2600
