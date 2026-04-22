@@ -1,0 +1,5 @@
+scenario,scenario_label,ship_cost_usd,holding_cost_usd,total_cost_usd,vs_baseline_usd,vs_baseline_pct,w_cost,w_carbon,recommended,cost_per_unit_served
+Baseline,Current State (No Optimisation),274774.71,34136062.8,34410837.51,0.0,0.0,,,,525.9782
+A,Cost Minimiser,8378.82,250.31,8629.13,-34402208.38,-99.97,1.0,0.0,False,1.5448
+B,Balanced,8378.82,250.31,8629.13,-34402208.38,-99.97,0.6,0.4,True,1.5448
+C,Carbon Champion,8378.82,250.31,8629.13,-34402208.38,-99.97,0.2,0.8,False,1.5448

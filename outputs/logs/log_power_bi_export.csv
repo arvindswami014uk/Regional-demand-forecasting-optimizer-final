@@ -1,0 +1,7 @@
+file,rows_written,grain,source_files,columns,status,created_utc
+pbi_demand_summary.csv,1549,week x region x category,fact_demand_enriched + modeling_dataset,"year_week,region,category,total_units,holiday_peak_flag,prime_event_flag,marketing_push_flag,demand_yoy_growth_pct",OK,2026-04-22T15:37:50.211221+00:00
+pbi_forecast_summary.csv,288,week x region x category,forecast_12wk_forward,"week_label,region,category,predicted_units,predicted_units_lower,predicted_units_upper,ci_width,forecast_type",OK,2026-04-22T15:37:50.211221+00:00
+pbi_inventory_summary.csv,5,warehouse,warehouse_utilization + starting_inventory + wh_alloc_recs + warehouses_clean,"warehouse_id,home_region,capacity_units,starting_inventory_units,starting_utilisation_pct,optimised_allocation_units,optimised_utilisation_pct,days_of_cover,daily_holding_cost_usd,recommendation",OK,2026-04-22T15:37:50.211221+00:00
+pbi_cost_summary.csv,4,scenario,cost_to_serve_comparison + scenario_comparison,"scenario,scenario_label,w_cost,w_carbon,ship_cost_usd,holding_cost_usd,total_cost_usd,vs_baseline_usd,vs_baseline_pct,cost_per_unit_served,recommended",OK,2026-04-22T15:37:50.211221+00:00
+pbi_carbon_summary.csv,363,scenario x warehouse x region + totals,inventory_placement_optimized + carbon_comparison,"scenario,warehouse_id,region,carbon_kg,units_allocated,carbon_per_unit_served,vs_baseline_pct,lead_time_days",OK,2026-04-22T15:37:50.211221+00:00
+pbi_schema.md,199,documentation,all PBI tables,schema + relationships + measures reference,OK,2026-04-22T15:37:50.211221+00:00
