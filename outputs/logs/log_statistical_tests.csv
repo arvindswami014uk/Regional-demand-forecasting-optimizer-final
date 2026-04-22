@@ -1,0 +1,11 @@
+run_ts,test,statistic,p_value,effect_pct,verdict,n_group1,n_group2,note
+2026-04-22T14:00:25Z,Mann-Whitney U — Holiday,408215.0,0.0,64.82,SIGNIFICANT (p=0.0000 < 0.05) — Holiday lift confirmed,838,702.0,one-sided greater; alpha=0.05
+2026-04-22T14:00:25Z,Mann-Whitney U — Marketing,166460.0,0.0,71.41,SIGNIFICANT (p=0.0000 < 0.05) — Marketing lift confirmed,1365,175.0,one-sided greater; alpha=0.05
+2026-04-22T14:00:25Z,Shapiro-Wilk — Residual Normality,0.724684,0.0,,NON-NORMAL (p=0.0000 <= 0.05) — Consider non-parametric safety stock,1451,,skew=1.147 kurt=44.307
+2026-04-22T14:00:25Z,PI Calibration — 80% Coverage,80.01,,0.01,"WELL-CALIBRATED (coverage=80.0%, target=80%)",1451,,Empirical p10/p90 on train residuals (fallback)
+2026-04-22T14:00:25Z,ACF/PACF — Lag Structure,,,,Series=81wks; MaxLags=27; See figure,81,,figures/stat_acf_pacf.png
+2026-04-22T14:04:34Z,Pearson Correlation Matrix,13.0,,,13 pairs with |r|>0.85,1444,31.0,figures/stat_feature_correlation_matrix.png
+2026-04-22T14:04:34Z,VIF — Feature Multicollinearity,19.0,,,19 severe; 2 moderate,31,,scope=all features; figures/stat_vif_scores.png
+2026-04-22T14:08:33Z,Naive Baseline — Last Value,44.49,,24.99,MAE=44.49 RMSE=62.2 WAPE=69.92% R2=-1.9098,89,,Persistence forecast — last train value per segment
+2026-04-22T14:08:33Z,Linear Regression Baseline,141.21,,76.37,MAE=141.21 RMSE=182.43 WAPE=221.89% R2=-24.0345,89,,OLS + StandardScaler; 31 features; test split
+2026-04-22T14:08:33Z,LightGBM CV Reference,33.37,,,MAE=33.37 RMSE=50.13 WAPE=21.5% R2=0.7554,1451,,4-fold walk-forward CV — authoritative planning metric
