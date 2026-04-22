@@ -1,0 +1,11 @@
+timestamp,script,step,status,detail
+2026-04-22T12:41:07.080600+00:00,feature_engineering.py,ensure_dirs,OK,output dirs ready
+2026-04-22T12:41:07.133239+00:00,feature_engineering.py,load_raw,OK,demand=5000 sku=5000 event=565 wh=5 lanes=20
+2026-04-22T12:41:07.168177+00:00,feature_engineering.py,build_base,OK,"rows=1540 weeks=81 total_units=219,180"
+2026-04-22T12:41:07.195025+00:00,feature_engineering.py,join_event_calendar,OK,rows=1540 event_weeks=81
+2026-04-22T12:41:07.215573+00:00,feature_engineering.py,join_sku_category_agg,OK,rows=1540 categories=6
+2026-04-22T12:41:07.221830+00:00,feature_engineering.py,join_warehouse_info,OK,rows=1540
+2026-04-22T12:41:07.235342+00:00,feature_engineering.py,join_lane_costs,OK,rows=1540 carbon=0.0673-0.1908
+2026-04-22T12:41:07.287890+00:00,feature_engineering.py,add_lag_features,OK,lag_null_pct=1.6%
+2026-04-22T12:41:07.298215+00:00,feature_engineering.py,add_calendar_features,OK,weeks_since_epoch_max=80
+2026-04-22T12:41:07.453272+00:00,feature_engineering.py,validate_and_save,OK,"shape=(1540, 42) output=/content/Regional-demand-forecasting-optimizer-final/data/processed/modeling_dataset.csv"

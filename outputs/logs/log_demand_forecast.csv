@@ -1,0 +1,17 @@
+timestamp,script,step,status,detail
+2026-04-22T12:53:51.780276+00:00,demand_forecast.py,ensure_dirs,OK,all output dirs ready
+2026-04-22T12:53:51.843522+00:00,demand_forecast.py,load_data,OK,"shape=(1540, 42)"
+2026-04-22T12:53:51.848171+00:00,demand_forecast.py,temporal_split,OK,train=1451 test=89
+2026-04-22T12:54:09.023473+00:00,demand_forecast.py,walk_forward_cv,OK,folds=4 mean_mae=33.37 mean_r2=0.7554
+2026-04-22T12:54:17.833392+00:00,demand_forecast.py,train_final_model,OK,train_rows=1451 features=32
+2026-04-22T12:54:18.073851+00:00,demand_forecast.py,evaluate_test,OK,test_mae=93.25 test_mape=192.33% test_r2=-11.1068
+2026-04-22T12:54:18.133026+00:00,demand_forecast.py,save_forecast_csv,OK,rows=1540
+2026-04-22T12:54:23.332727+00:00,demand_forecast.py,generate_forward_forecast,OK,rows=288 horizon=12wks
+2026-04-22T12:54:48.207649+00:00,demand_forecast.py,plot_actual_vs_predicted,OK,figures=24
+2026-04-22T12:54:49.658885+00:00,demand_forecast.py,plot_feature_importance,OK,"top3=['category_velocity', 'weeks_since_epoch', 'weather_disruption']"
+2026-04-22T12:54:49.672886+00:00,demand_forecast.py,write_report,OK,/content/Regional-demand-forecasting-optimizer-final/reports/report_demand_forecast.md
+
+wape_full_test,OK,wape=146.52% mape=192.3% r2=-11.1068 mae=93.25 rmse=126.87,"2026-04-22 13:16 UTC"
+train_overfit_flag,OK,train_r2=0.9998 test_r2=-11.1068 train_mae=0.97 test_mae=93.25,"2026-04-22 13:16 UTC"
+distribution_shift,OK,train_mean=147.2 test_mean=63.6 shift=-83.5,"2026-04-22 13:16 UTC"
+diagnostic_report_written,OK,path=/content/Regional-demand-forecasting-optimizer-final/reports/report_demand_forecast.md,"2026-04-22 13:16 UTC"

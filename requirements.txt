@@ -1,0 +1,20 @@
+# ============================================================
+# requirements.txt
+# Regional Demand Forecasting and Inventory Placement Optimizer
+# Generated : 2026-04-22 13:03 UTC
+# Python    : 3.10+
+# Usage     : pip install -r requirements.txt
+# ============================================================
+
+# --- Core data manipulation ---
+pandas==2.2.2
+numpy==2.0.2
+
+# --- Machine learning ---
+lightgbm==4.6.0
+scikit-learn==1.6.1
+joblib==1.5.3
+
+# --- Visualisation ---
+matplotlib==3.10.0
+seaborn==0.13.2

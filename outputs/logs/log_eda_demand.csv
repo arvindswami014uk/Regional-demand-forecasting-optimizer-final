@@ -1,0 +1,10 @@
+timestamp,script,step,status,detail
+2026-04-22T12:25:51.252021,eda_demand.py,ensure_output_dirs,OK,all output dirs ready
+2026-04-22T12:25:51.395164,eda_demand.py,load_data,OK,rows=5000 cats=6 regions=4
+2026-04-22T12:25:51.501107,eda_demand.py,build_weekly_grain,OK,"rows=1540 weeks=81 total_units=219,180"
+2026-04-22T12:25:52.907618,eda_demand.py,plot_weekly_units_by_region,OK,/content/Regional-demand-forecasting-optimizer-final/figures/eda_demand_weekly_units_by_region.png
+2026-04-22T12:25:54.251938,eda_demand.py,plot_units_by_category,OK,/content/Regional-demand-forecasting-optimizer-final/figures/eda_demand_units_by_category.png
+2026-04-22T12:25:55.709156,eda_demand.py,plot_seasonality_heatmap,OK,/content/Regional-demand-forecasting-optimizer-final/figures/eda_demand_seasonality_heatmap.png
+2026-04-22T12:25:57.158847,eda_demand.py,plot_event_flag_impact,OK,"{'holiday_peak_flag': 89.0, 'prime_event_flag': -2.5, 'marketing_push_flag': 75.3}"
+2026-04-22T12:26:02.197624,eda_demand.py,plot_weather_vs_units,OK,"{'East': 0.017, 'North': -0.051, 'South': 0.027, 'West': 0.012}"
+2026-04-22T12:26:02.200351,eda_demand.py,write_report,OK,/content/Regional-demand-forecasting-optimizer-final/reports/report_eda_demand.md

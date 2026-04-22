@@ -1,0 +1,8 @@
+step,status,detail,timestamp
+load_inventory,OK,shape=(5000, 5),"2026-04-22 13:10:14 UTC"
+load_warehouses,OK,shape=(5, 4),"2026-04-22 13:10:14 UTC"
+id_alignment,OK,perfect_match=True,"2026-04-22 13:10:14 UTC"
+aggregation,OK,rows=5 total_units=8926517,"2026-04-22 13:10:14 UTC"
+join_metadata,OK,nulls=0,"2026-04-22 13:10:14 UTC"
+utilization_calc,OK,min=998.4% max=1604.3%,"2026-04-22 13:10:14 UTC"
+write_csv,OK,path=/content/Regional-demand-forecasting-optimizer-final/data/processed/warehouse_utilization.csv,"2026-04-22 13:10:14 UTC"

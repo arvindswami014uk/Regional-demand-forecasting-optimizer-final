@@ -1,0 +1,7 @@
+timestamp,script,step,status,detail
+2026-04-22T12:35:16.090831+00:00,eda_costs_carbon.py,ensure_output_dirs,OK,all output dirs ready
+2026-04-22T12:35:16.126531+00:00,eda_costs_carbon.py,load_data,OK,lanes=20 avg_vol_m3=0.017330 carbon_range=0.1074-0.6447
+2026-04-22T12:35:17.798662+00:00,eda_costs_carbon.py,plot_lane_heatmap,OK,"{'cheapest_lane': {'warehouse_id': 'WH-EAST', 'demand_region': 'East', 'ship_cost_per_unit': 1.5}, 'costliest_lane': {'warehouse_id': 'WH-EAST', 'demand_region': 'West', 'ship_cost_per_unit': 8.0}, 'fastest_lane': {'warehouse_id': 'WH-EAST', 'demand_region': 'East', 'lead_time_days': 1}, 'slowest_lane': {'warehouse_id': 'WH-EAST', 'demand_region': 'West', 'lead_time_days': 6}}"
+2026-04-22T12:35:18.997614+00:00,eda_costs_carbon.py,plot_efficiency_scores,OK,"{'best_wh': 'WH-CENTRAL', 'worst_wh': 'WH-WEST', 'best_score': 0.7654, 'worst_score': 0.5096, 'perfect_lanes': 4, 'zero_lanes': 2}"
+2026-04-22T12:35:21.898878+00:00,eda_costs_carbon.py,plot_carbon_per_unit,OK,"{'min_carbon_kg': 0.107447, 'max_carbon_kg': 0.644684, 'mean_carbon_kg': 0.322342, 'greenest_lane': {'warehouse_id': 'WH-EAST', 'demand_region': 'East', 'carbon_kg_per_unit': 0.107447}, 'dirtiest_lane': {'warehouse_id': 'WH-EAST', 'demand_region': 'West', 'carbon_kg_per_unit': 0.644684}}"
+2026-04-22T12:35:21.904421+00:00,eda_costs_carbon.py,write_report,OK,/content/Regional-demand-forecasting-optimizer-final/reports/report_eda_costs_carbon.md

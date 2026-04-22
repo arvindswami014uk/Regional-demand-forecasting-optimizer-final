@@ -1,0 +1,8 @@
+step,status,detail,timestamp
+load_historical_forecast,OK,shape=(1540, 8) train_rows=1451,"2026-04-22 13:12:41 UTC"
+residual_std_computation,OK,groups=24 std_min=0.87 std_max=4.05,"2026-04-22 13:12:41 UTC"
+write_residual_std,OK,path=/content/Regional-demand-forecasting-optimizer-final/data/processed/forecast_residual_std.csv,"2026-04-22 13:12:41 UTC"
+load_forward_forecast,OK,shape=(288, 5),"2026-04-22 13:12:41 UTC"
+join_std,OK,nulls=0,"2026-04-22 13:12:41 UTC"
+confidence_intervals,OK,z=1.282 interval=80pct lower_min=56.5 upper_max=346.6,"2026-04-22 13:12:41 UTC"
+overwrite_forward_forecast,OK,shape=(288, 11),"2026-04-22 13:12:41 UTC"

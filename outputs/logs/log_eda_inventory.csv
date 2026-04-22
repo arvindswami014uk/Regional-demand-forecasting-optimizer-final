@@ -1,0 +1,9 @@
+timestamp,script,step,status,detail
+2026-04-22T12:30:08.441133+00:00,eda_inventory.py,ensure_output_dirs,OK,all output dirs ready
+2026-04-22T12:30:08.510767+00:00,eda_inventory.py,load_data,OK,inv=5000 sku=5000 wh=5 demand=5000
+2026-04-22T12:30:08.535783+00:00,eda_inventory.py,build_inventory_master,OK,"rows=5000 total_units=8,926,517 total_value=$593,317,335"
+2026-04-22T12:30:08.547191+00:00,eda_inventory.py,compute_days_of_cover,OK,rows=8 min_doc=4191.5 max_doc=21093.4
+2026-04-22T12:30:09.285864+00:00,eda_inventory.py,plot_units_by_warehouse,OK,/content/Regional-demand-forecasting-optimizer-final/figures/eda_inventory_units_by_warehouse.png
+2026-04-22T12:30:10.026719+00:00,eda_inventory.py,plot_value_by_category,OK,/content/Regional-demand-forecasting-optimizer-final/figures/eda_inventory_value_by_category.png
+2026-04-22T12:30:10.650492+00:00,eda_inventory.py,plot_days_of_cover,OK,"{'min_doc': 4191.5, 'max_doc': 21093.4, 'mean_doc': 11566.7, 'at_risk': 0, 'watch': 0, 'healthy': 8}"
+2026-04-22T12:30:10.655234+00:00,eda_inventory.py,write_report,OK,/content/Regional-demand-forecasting-optimizer-final/reports/report_eda_inventory.md
