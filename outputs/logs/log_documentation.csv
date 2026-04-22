@@ -1,0 +1,4 @@
+file,location,lines_written,sections,status,created_utc
+README.md,repo root,247,"9 (overview, structure, quickstart, pipeline, results, figures, stack, limitations, author)",OK,2026-04-22T15:47:52.435744+00:00
+reports/data_lineage.md,reports/,264,6 stages — all processed files with row counts and column changes,OK,2026-04-22T15:47:52.435744+00:00
+reports/final_report.md,reports/,355,7 chapters + 2 appendices — all locked-in numbers injected,OK,2026-04-22T15:47:52.435744+00:00
