@@ -1,0 +1,4 @@
+scenario,scenario_label,w_cost,w_carbon,solver_status,solver_message,relaxed,total_units,total_cost_usd,total_carbon_kg,segments_meeting_sl,service_level_pct,recommended
+A,Cost Minimiser,1.0,0.0,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),False,5585.88,8629.13,643.9391,24,100.0,False
+B,Balanced,0.6,0.4,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),False,5585.88,8629.13,643.9391,24,100.0,True
+C,Carbon Champion,0.2,0.8,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),False,5585.88,8629.13,643.9391,24,100.0,False

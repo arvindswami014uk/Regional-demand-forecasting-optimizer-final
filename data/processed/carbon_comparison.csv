@@ -1,0 +1,5 @@
+scenario,scope,warehouse_id,region,units_allocated,carbon_kg,carbon_per_unit,lead_time_days,vs_baseline_kg,vs_baseline_pct
+Baseline,total,ALL,ALL,65422.55,22781.114,0.348215,3.0,0.0,0.0
+A,total,ALL,ALL,5585.87,643.9391,0.009843,3.0,-22137.1749,-97.17
+B,total,ALL,ALL,5585.87,643.9391,0.009843,3.0,-22137.1749,-97.17
+C,total,ALL,ALL,5585.87,643.9391,0.009843,3.0,-22137.1749,-97.17

@@ -1,0 +1,5 @@
+scenario,scenario_label,ship_cost_usd,holding_cost_usd,total_cost_usd,vs_baseline_usd,vs_baseline_pct,recommended,note
+Baseline,Current State (No Optimisation),274774.71,34136062.8,34410837.51,0.0,0.0,False,Baseline: current holding cost (84 days) + shipping at unoptimised avg cross-lane rate
+A,Cost Minimiser,8378.82,250.31,8629.13,-34402208.38,-99.97,False,LP-optimised. All scenarios identical: cost and carbon co-minimised via home-lane routing (Pareto-collapsed).
+B,Balanced,8378.82,250.31,8629.13,-34402208.38,-99.97,True,LP-optimised. All scenarios identical: cost and carbon co-minimised via home-lane routing (Pareto-collapsed).
+C,Carbon Champion,8378.82,250.31,8629.13,-34402208.38,-99.97,False,LP-optimised. All scenarios identical: cost and carbon co-minimised via home-lane routing (Pareto-collapsed).

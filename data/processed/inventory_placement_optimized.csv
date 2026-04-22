@@ -1,0 +1,361 @@
+scenario,scenario_label,warehouse_id,region,category,units_allocated,ship_cost_usd,holding_cost_usd,total_cost_usd,carbon_kg,lead_time_days,ship_cost_per_unit
+A,Cost Minimiser,WH-NORTH,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-SOUTH,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-EAST,East,BEAUTY,74.64,111.9538,3.1618,115.1155,9.958674,1,1.5
+A,Cost Minimiser,WH-WEST,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-CENTRAL,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-SOUTH,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-EAST,East,ELECTRONICS,255.79,383.685,12.9744,396.6594,17.359053,1,1.5
+A,Cost Minimiser,WH-WEST,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-CENTRAL,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,East,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-SOUTH,East,HOME,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-EAST,East,HOME,286.94,430.4025,20.113,450.5155,42.761478,1,1.5
+A,Cost Minimiser,WH-WEST,East,HOME,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-CENTRAL,East,HOME,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-SOUTH,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-EAST,East,KITCHEN,279.97,419.9525,6.973,426.9255,18.842149,1,1.5
+A,Cost Minimiser,WH-WEST,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-CENTRAL,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,East,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-SOUTH,East,PET,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-EAST,East,PET,306.39,459.5862,15.8556,475.4419,32.797953,1,1.5
+A,Cost Minimiser,WH-WEST,East,PET,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-CENTRAL,East,PET,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,East,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-SOUTH,East,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-EAST,East,TOYS,284.47,426.7125,10.1579,436.8704,54.272197,1,1.5
+A,Cost Minimiser,WH-WEST,East,TOYS,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-CENTRAL,East,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,North,BEAUTY,167.98,251.9638,7.116,259.0797,22.413049,1,1.5
+A,Cost Minimiser,WH-SOUTH,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-EAST,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-WEST,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-CENTRAL,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,North,ELECTRONICS,259.83,389.7487,13.1795,402.9282,17.633395,1,1.5
+A,Cost Minimiser,WH-SOUTH,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-EAST,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-WEST,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-CENTRAL,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,North,HOME,63.76,95.6362,4.4691,100.1054,9.501681,1,1.5
+A,Cost Minimiser,WH-SOUTH,North,HOME,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-EAST,North,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-WEST,North,HOME,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-CENTRAL,North,HOME,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,North,KITCHEN,346.76,520.145,8.6366,528.7816,23.337519,1,1.5
+A,Cost Minimiser,WH-SOUTH,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-EAST,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-WEST,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-CENTRAL,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,North,PET,207.28,310.92,10.7267,321.6467,22.188522,1,1.5
+A,Cost Minimiser,WH-SOUTH,North,PET,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-EAST,North,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-WEST,North,PET,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-CENTRAL,North,PET,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,North,TOYS,341.95,512.9237,12.2102,525.134,65.23713,1,1.5
+A,Cost Minimiser,WH-SOUTH,North,TOYS,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-EAST,North,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-WEST,North,TOYS,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-CENTRAL,North,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-SOUTH,South,BEAUTY,229.03,343.55,9.7025,353.2525,30.559963,1,1.5
+A,Cost Minimiser,WH-EAST,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-WEST,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-CENTRAL,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-SOUTH,South,ELECTRONICS,335.61,503.4212,17.0233,520.4446,22.776278,1,1.5
+A,Cost Minimiser,WH-EAST,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-WEST,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-CENTRAL,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,South,HOME,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-SOUTH,South,HOME,138.43,207.645,9.7034,217.3484,20.630008,1,1.5
+A,Cost Minimiser,WH-EAST,South,HOME,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-WEST,South,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-CENTRAL,South,HOME,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-SOUTH,South,KITCHEN,270.28,405.4212,6.7317,412.153,18.19017,1,1.5
+A,Cost Minimiser,WH-EAST,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-WEST,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-CENTRAL,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,South,PET,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-SOUTH,South,PET,248.6,372.9025,12.8651,385.7676,26.611846,1,1.5
+A,Cost Minimiser,WH-EAST,South,PET,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-WEST,South,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-CENTRAL,South,PET,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,South,TOYS,0.0,0.0,0.0,0.0,0.0,5,7.0
+A,Cost Minimiser,WH-SOUTH,South,TOYS,292.2,438.2938,10.4336,448.7274,55.74518,1,1.5
+A,Cost Minimiser,WH-EAST,South,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.5
+A,Cost Minimiser,WH-WEST,South,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-CENTRAL,South,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.0
+A,Cost Minimiser,WH-NORTH,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-SOUTH,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-EAST,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-WEST,West,BEAUTY,241.13,361.7,10.2151,371.9151,32.174469,1,1.5
+A,Cost Minimiser,WH-CENTRAL,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-SOUTH,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-EAST,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-WEST,West,ELECTRONICS,267.94,401.915,13.5909,415.5059,18.183833,1,1.5
+A,Cost Minimiser,WH-CENTRAL,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,West,HOME,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-SOUTH,West,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-EAST,West,HOME,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-WEST,West,HOME,260.57,390.855,18.2649,409.1199,38.832343,1,1.5
+A,Cost Minimiser,WH-CENTRAL,West,HOME,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-SOUTH,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-EAST,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-WEST,West,KITCHEN,179.51,269.26,4.4709,273.7309,12.080978,1,1.5
+A,Cost Minimiser,WH-CENTRAL,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,West,PET,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-SOUTH,West,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-EAST,West,PET,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-WEST,West,PET,181.96,272.945,9.4165,282.3615,19.478471,1,1.5
+A,Cost Minimiser,WH-CENTRAL,West,PET,0.0,0.0,0.0,0.0,0.0,2,3.5
+A,Cost Minimiser,WH-NORTH,West,TOYS,0.0,0.0,0.0,0.0,0.0,4,5.0
+A,Cost Minimiser,WH-SOUTH,West,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+A,Cost Minimiser,WH-EAST,West,TOYS,0.0,0.0,0.0,0.0,0.0,6,8.0
+A,Cost Minimiser,WH-WEST,West,TOYS,64.85,97.28,2.3158,99.5958,12.372732,1,1.5
+A,Cost Minimiser,WH-CENTRAL,West,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-SOUTH,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-EAST,East,BEAUTY,74.64,111.9538,3.1618,115.1155,9.958674,1,1.5
+B,Balanced,WH-WEST,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-CENTRAL,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-SOUTH,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-EAST,East,ELECTRONICS,255.79,383.685,12.9744,396.6594,17.359053,1,1.5
+B,Balanced,WH-WEST,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-CENTRAL,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,East,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-SOUTH,East,HOME,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-EAST,East,HOME,286.94,430.4025,20.113,450.5155,42.761478,1,1.5
+B,Balanced,WH-WEST,East,HOME,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-CENTRAL,East,HOME,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-SOUTH,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-EAST,East,KITCHEN,279.97,419.9525,6.973,426.9255,18.842149,1,1.5
+B,Balanced,WH-WEST,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-CENTRAL,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,East,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-SOUTH,East,PET,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-EAST,East,PET,306.39,459.5862,15.8556,475.4419,32.797953,1,1.5
+B,Balanced,WH-WEST,East,PET,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-CENTRAL,East,PET,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,East,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-SOUTH,East,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-EAST,East,TOYS,284.47,426.7125,10.1579,436.8704,54.272197,1,1.5
+B,Balanced,WH-WEST,East,TOYS,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-CENTRAL,East,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,North,BEAUTY,167.98,251.9638,7.116,259.0797,22.413049,1,1.5
+B,Balanced,WH-SOUTH,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-EAST,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-WEST,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-CENTRAL,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,North,ELECTRONICS,259.83,389.7487,13.1795,402.9282,17.633395,1,1.5
+B,Balanced,WH-SOUTH,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-EAST,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-WEST,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-CENTRAL,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,North,HOME,63.76,95.6362,4.4691,100.1054,9.501681,1,1.5
+B,Balanced,WH-SOUTH,North,HOME,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-EAST,North,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-WEST,North,HOME,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-CENTRAL,North,HOME,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,North,KITCHEN,346.76,520.145,8.6366,528.7816,23.337519,1,1.5
+B,Balanced,WH-SOUTH,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-EAST,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-WEST,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-CENTRAL,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,North,PET,207.28,310.92,10.7267,321.6467,22.188522,1,1.5
+B,Balanced,WH-SOUTH,North,PET,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-EAST,North,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-WEST,North,PET,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-CENTRAL,North,PET,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,North,TOYS,341.95,512.9237,12.2102,525.134,65.23713,1,1.5
+B,Balanced,WH-SOUTH,North,TOYS,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-EAST,North,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-WEST,North,TOYS,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-CENTRAL,North,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-SOUTH,South,BEAUTY,229.03,343.55,9.7025,353.2525,30.559963,1,1.5
+B,Balanced,WH-EAST,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-WEST,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-CENTRAL,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-SOUTH,South,ELECTRONICS,335.61,503.4212,17.0233,520.4446,22.776278,1,1.5
+B,Balanced,WH-EAST,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-WEST,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-CENTRAL,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,South,HOME,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-SOUTH,South,HOME,138.43,207.645,9.7034,217.3484,20.630008,1,1.5
+B,Balanced,WH-EAST,South,HOME,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-WEST,South,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-CENTRAL,South,HOME,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-SOUTH,South,KITCHEN,270.28,405.4212,6.7317,412.153,18.19017,1,1.5
+B,Balanced,WH-EAST,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-WEST,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-CENTRAL,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,South,PET,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-SOUTH,South,PET,248.6,372.9025,12.8651,385.7676,26.611846,1,1.5
+B,Balanced,WH-EAST,South,PET,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-WEST,South,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-CENTRAL,South,PET,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,South,TOYS,0.0,0.0,0.0,0.0,0.0,5,7.0
+B,Balanced,WH-SOUTH,South,TOYS,292.2,438.2938,10.4336,448.7274,55.74518,1,1.5
+B,Balanced,WH-EAST,South,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.5
+B,Balanced,WH-WEST,South,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-CENTRAL,South,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.0
+B,Balanced,WH-NORTH,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-SOUTH,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-EAST,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-WEST,West,BEAUTY,241.13,361.7,10.2151,371.9151,32.174469,1,1.5
+B,Balanced,WH-CENTRAL,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-SOUTH,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-EAST,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-WEST,West,ELECTRONICS,267.94,401.915,13.5909,415.5059,18.183833,1,1.5
+B,Balanced,WH-CENTRAL,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,West,HOME,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-SOUTH,West,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-EAST,West,HOME,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-WEST,West,HOME,260.57,390.855,18.2649,409.1199,38.832343,1,1.5
+B,Balanced,WH-CENTRAL,West,HOME,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-SOUTH,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-EAST,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-WEST,West,KITCHEN,179.51,269.26,4.4709,273.7309,12.080978,1,1.5
+B,Balanced,WH-CENTRAL,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,West,PET,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-SOUTH,West,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-EAST,West,PET,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-WEST,West,PET,181.96,272.945,9.4165,282.3615,19.478471,1,1.5
+B,Balanced,WH-CENTRAL,West,PET,0.0,0.0,0.0,0.0,0.0,2,3.5
+B,Balanced,WH-NORTH,West,TOYS,0.0,0.0,0.0,0.0,0.0,4,5.0
+B,Balanced,WH-SOUTH,West,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+B,Balanced,WH-EAST,West,TOYS,0.0,0.0,0.0,0.0,0.0,6,8.0
+B,Balanced,WH-WEST,West,TOYS,64.85,97.28,2.3158,99.5958,12.372732,1,1.5
+B,Balanced,WH-CENTRAL,West,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-SOUTH,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-EAST,East,BEAUTY,74.64,111.9538,3.1618,115.1155,9.958674,1,1.5
+C,Carbon Champion,WH-WEST,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-CENTRAL,East,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-SOUTH,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-EAST,East,ELECTRONICS,255.79,383.685,12.9744,396.6594,17.359053,1,1.5
+C,Carbon Champion,WH-WEST,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-CENTRAL,East,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,East,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-SOUTH,East,HOME,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-EAST,East,HOME,286.94,430.4025,20.113,450.5155,42.761478,1,1.5
+C,Carbon Champion,WH-WEST,East,HOME,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-CENTRAL,East,HOME,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-SOUTH,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-EAST,East,KITCHEN,279.97,419.9525,6.973,426.9255,18.842149,1,1.5
+C,Carbon Champion,WH-WEST,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-CENTRAL,East,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,East,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-SOUTH,East,PET,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-EAST,East,PET,306.39,459.5862,15.8556,475.4419,32.797953,1,1.5
+C,Carbon Champion,WH-WEST,East,PET,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-CENTRAL,East,PET,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,East,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-SOUTH,East,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-EAST,East,TOYS,284.47,426.7125,10.1579,436.8704,54.272197,1,1.5
+C,Carbon Champion,WH-WEST,East,TOYS,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-CENTRAL,East,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,North,BEAUTY,167.98,251.9638,7.116,259.0797,22.413049,1,1.5
+C,Carbon Champion,WH-SOUTH,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-EAST,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-WEST,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-CENTRAL,North,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,North,ELECTRONICS,259.83,389.7487,13.1795,402.9282,17.633395,1,1.5
+C,Carbon Champion,WH-SOUTH,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-EAST,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-WEST,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-CENTRAL,North,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,North,HOME,63.76,95.6362,4.4691,100.1054,9.501681,1,1.5
+C,Carbon Champion,WH-SOUTH,North,HOME,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-EAST,North,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-WEST,North,HOME,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-CENTRAL,North,HOME,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,North,KITCHEN,346.76,520.145,8.6366,528.7816,23.337519,1,1.5
+C,Carbon Champion,WH-SOUTH,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-EAST,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-WEST,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-CENTRAL,North,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,North,PET,207.28,310.92,10.7267,321.6467,22.188522,1,1.5
+C,Carbon Champion,WH-SOUTH,North,PET,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-EAST,North,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-WEST,North,PET,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-CENTRAL,North,PET,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,North,TOYS,341.95,512.9237,12.2102,525.134,65.23713,1,1.5
+C,Carbon Champion,WH-SOUTH,North,TOYS,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-EAST,North,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-WEST,North,TOYS,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-CENTRAL,North,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-SOUTH,South,BEAUTY,229.03,343.55,9.7025,353.2525,30.559963,1,1.5
+C,Carbon Champion,WH-EAST,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-WEST,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-CENTRAL,South,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-SOUTH,South,ELECTRONICS,335.61,503.4212,17.0233,520.4446,22.776278,1,1.5
+C,Carbon Champion,WH-EAST,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-WEST,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-CENTRAL,South,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,South,HOME,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-SOUTH,South,HOME,138.43,207.645,9.7034,217.3484,20.630008,1,1.5
+C,Carbon Champion,WH-EAST,South,HOME,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-WEST,South,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-CENTRAL,South,HOME,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-SOUTH,South,KITCHEN,270.28,405.4212,6.7317,412.153,18.19017,1,1.5
+C,Carbon Champion,WH-EAST,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-WEST,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-CENTRAL,South,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,South,PET,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-SOUTH,South,PET,248.6,372.9025,12.8651,385.7676,26.611846,1,1.5
+C,Carbon Champion,WH-EAST,South,PET,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-WEST,South,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-CENTRAL,South,PET,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,South,TOYS,0.0,0.0,0.0,0.0,0.0,5,7.0
+C,Carbon Champion,WH-SOUTH,South,TOYS,292.2,438.2938,10.4336,448.7274,55.74518,1,1.5
+C,Carbon Champion,WH-EAST,South,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.5
+C,Carbon Champion,WH-WEST,South,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-CENTRAL,South,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.0
+C,Carbon Champion,WH-NORTH,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-SOUTH,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-EAST,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-WEST,West,BEAUTY,241.13,361.7,10.2151,371.9151,32.174469,1,1.5
+C,Carbon Champion,WH-CENTRAL,West,BEAUTY,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-SOUTH,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-EAST,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-WEST,West,ELECTRONICS,267.94,401.915,13.5909,415.5059,18.183833,1,1.5
+C,Carbon Champion,WH-CENTRAL,West,ELECTRONICS,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,West,HOME,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-SOUTH,West,HOME,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-EAST,West,HOME,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-WEST,West,HOME,260.57,390.855,18.2649,409.1199,38.832343,1,1.5
+C,Carbon Champion,WH-CENTRAL,West,HOME,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-SOUTH,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-EAST,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-WEST,West,KITCHEN,179.51,269.26,4.4709,273.7309,12.080978,1,1.5
+C,Carbon Champion,WH-CENTRAL,West,KITCHEN,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,West,PET,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-SOUTH,West,PET,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-EAST,West,PET,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-WEST,West,PET,181.96,272.945,9.4165,282.3615,19.478471,1,1.5
+C,Carbon Champion,WH-CENTRAL,West,PET,0.0,0.0,0.0,0.0,0.0,2,3.5
+C,Carbon Champion,WH-NORTH,West,TOYS,0.0,0.0,0.0,0.0,0.0,4,5.0
+C,Carbon Champion,WH-SOUTH,West,TOYS,0.0,0.0,0.0,0.0,0.0,3,4.0
+C,Carbon Champion,WH-EAST,West,TOYS,0.0,0.0,0.0,0.0,0.0,6,8.0
+C,Carbon Champion,WH-WEST,West,TOYS,64.85,97.28,2.3158,99.5958,12.372732,1,1.5
+C,Carbon Champion,WH-CENTRAL,West,TOYS,0.0,0.0,0.0,0.0,0.0,2,3.5

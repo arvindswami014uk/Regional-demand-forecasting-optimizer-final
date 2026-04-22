@@ -1,0 +1,6 @@
+warehouse_id,home_region,capacity_units,allocated_units,utilisation_pct,top_categories,top_regions,total_cost_usd,total_carbon_kg,scenario,recommendation
+WH-NORTH,North,120000,1387.56,1.1563,KITCHEN|TOYS,North|East,2137.6756,160.311296,B,Under-utilised — candidate for safety stock buffer storage
+WH-SOUTH,South,115000,1514.15,1.3167,ELECTRONICS|TOYS,South|East,2337.6935,174.513445,B,Under-utilised — candidate for safety stock buffer storage
+WH-EAST,East,118000,1488.2,1.2612,PET|HOME,East|North,2301.5282,175.991504,B,Under-utilised — candidate for safety stock buffer storage
+WH-WEST,West,110000,1195.96,1.0872,ELECTRONICS|HOME,West|East,1852.2291,133.122826,B,Under-utilised — candidate for safety stock buffer storage
+WH-CENTRAL,Central,180000,0.0,0.0,BEAUTY|ELECTRONICS,East|North,0.0,0.0,B,Zero allocation — consolidate demand to active warehouses
