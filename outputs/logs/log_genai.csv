@@ -1,0 +1,27 @@
+timestamp,cell,module,action,provider,model,prompt_chars,response_words,elapsed_secs,output_file,status,notes
+2026-04-22 14:29:54 UTC,A1,llm_narrator,generate_executive_summary,Groq,llama-3.3-70b-versatile,3128,581,2.62,reports/executive_summary_llm.md,SUCCESS,FC range: 58-345 | context: 2212 chars
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_01,Groq,llama-3.3-70b-versatile,0,95,0.77,reports/anomaly_explanations.md,SUCCESS,West|PET|z=+4.20
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_02,Groq,llama-3.3-70b-versatile,0,104,0.79,reports/anomaly_explanations.md,SUCCESS,East|KITCHEN|z=+3.93
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_03,Groq,llama-3.3-70b-versatile,0,98,0.78,reports/anomaly_explanations.md,SUCCESS,South|KITCHEN|z=+3.50
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_04,Groq,llama-3.3-70b-versatile,0,89,0.65,reports/anomaly_explanations.md,SUCCESS,South|KITCHEN|z=+3.40
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_05,Groq,llama-3.3-70b-versatile,0,108,0.71,reports/anomaly_explanations.md,SUCCESS,North|TOYS|z=+3.32
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_06,Groq,llama-3.3-70b-versatile,0,95,0.75,reports/anomaly_explanations.md,SUCCESS,North|KITCHEN|z=+3.31
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_07,Groq,llama-3.3-70b-versatile,0,94,0.73,reports/anomaly_explanations.md,SUCCESS,South|ELECTRONICS|z=+3.24
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_08,Groq,llama-3.3-70b-versatile,0,101,0.78,reports/anomaly_explanations.md,SUCCESS,East|HOME|z=+3.19
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_09,Groq,llama-3.3-70b-versatile,0,108,0.8,reports/anomaly_explanations.md,SUCCESS,South|PET|z=+3.00
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_10,Groq,llama-3.3-70b-versatile,0,111,0.81,reports/anomaly_explanations.md,SUCCESS,West|PET|z=+2.94
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_11,Groq,llama-3.3-70b-versatile,0,109,0.88,reports/anomaly_explanations.md,SUCCESS,North|HOME|z=+2.89
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_12,Groq,llama-3.3-70b-versatile,0,112,0.76,reports/anomaly_explanations.md,SUCCESS,South|BEAUTY|z=+2.87
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_13,Groq,llama-3.3-70b-versatile,0,105,0.73,reports/anomaly_explanations.md,SUCCESS,South|BEAUTY|z=+2.75
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_14,Groq,llama-3.3-70b-versatile,0,126,1.1,reports/anomaly_explanations.md,SUCCESS,West|BEAUTY|z=+2.74
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_15,Groq,llama-3.3-70b-versatile,0,108,0.8,reports/anomaly_explanations.md,SUCCESS,East|ELECTRONICS|z=+2.72
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_16,Groq,llama-3.3-70b-versatile,0,97,0.68,reports/anomaly_explanations.md,SUCCESS,East|PET|z=+2.72
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_17,Groq,llama-3.3-70b-versatile,0,89,0.73,reports/anomaly_explanations.md,SUCCESS,East|HOME|z=+2.72
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_18,Groq,llama-3.3-70b-versatile,0,110,0.82,reports/anomaly_explanations.md,SUCCESS,North|BEAUTY|z=+2.72
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_19,Groq,llama-3.3-70b-versatile,0,111,0.9,reports/anomaly_explanations.md,SUCCESS,North|HOME|z=+2.69
+2026-04-22 14:33:47 UTC,A2,anomaly_explainer,explain_anomaly_20,Groq,llama-3.3-70b-versatile,0,97,0.71,reports/anomaly_explanations.md,SUCCESS,North|KITCHEN|z=+2.67
+2026-04-22 14:39:39 UTC,A3,rag_qa,rag_query_Q1,Groq,llama-3.3-70b-versatile,1874,60,0.58,reports/rag_qa_log.md,SUCCESS,Which warehouse has the highest utilization?
+2026-04-22 14:39:39 UTC,A3,rag_qa,rag_query_Q2,Groq,llama-3.3-70b-versatile,2013,63,0.57,reports/rag_qa_log.md,SUCCESS,What is the 12-week demand forecast for ELECTRONICS in the East region?
+2026-04-22 14:39:39 UTC,A3,rag_qa,rag_query_Q3,Groq,llama-3.3-70b-versatile,1458,38,0.49,reports/rag_qa_log.md,SUCCESS,Which shipping lane has the lowest carbon footprint?
+2026-04-22 14:39:39 UTC,A3,rag_qa,rag_query_Q4,Groq,llama-3.3-70b-versatile,844,54,0.57,reports/rag_qa_log.md,SUCCESS,What are the top 3 most expensive SKU categories to hold?
+2026-04-22 14:39:39 UTC,A3,rag_qa,rag_query_Q5,Groq,llama-3.3-70b-versatile,1927,67,0.58,reports/rag_qa_log.md,SUCCESS,Which region-category combination has the highest forecast uncertainty?
