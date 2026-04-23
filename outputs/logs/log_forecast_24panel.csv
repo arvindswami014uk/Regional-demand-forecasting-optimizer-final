@@ -1,0 +1,13 @@
+step,status,detail,value,timestamp
+load_data,OK,modeling_dataset_rows,1540,2026-04-23T19:26:13.578528+00:00
+load_data,OK,forecast_12wk_rows,288,2026-04-23T19:26:13.578528+00:00
+load_data,OK,weekly_forecast_rows,1540,2026-04-23T19:26:13.578528+00:00
+segments,OK,actuals_segments_found,24,2026-04-23T19:26:13.578528+00:00
+segments,OK,regions,4,2026-04-23T19:26:13.578528+00:00
+segments,OK,categories,6,2026-04-23T19:26:13.578528+00:00
+panels,OK,panels_plotted,24,2026-04-23T19:26:13.578528+00:00
+panels,OK,panels_missing,0,2026-04-23T19:26:13.578528+00:00
+figure,OK,dpi,120,2026-04-23T19:26:13.578528+00:00
+figure,OK,size_inches,24x16,2026-04-23T19:26:13.578528+00:00
+figure,OK,file_size_bytes,1035992,2026-04-23T19:26:13.578528+00:00
+output,OK,path,figures/forecast_24panel.png,2026-04-23T19:26:13.578528+00:00
