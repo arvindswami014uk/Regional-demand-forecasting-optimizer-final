@@ -121,7 +121,7 @@ The dashboard is designed to let a planner move quickly between forecast perform
 
 Gamma presentation link placeholder:
 
-- `[GAMMA_LINK]`
+- `[(https://gamma.app/docs/40638170-56ncvl100eozp23)]`
 
 PDF export of the deck:
 
