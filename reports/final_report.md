@@ -223,9 +223,9 @@ The unoptimised baseline assumes cross-lane shipping at average
 
 | Component | Baseline | Optimised | Saving |
 |-----------|----------|-----------|--------|
-| Holding cost | \$34,136,062.80 | negligible | — |
+| Holding cost | \$34,136,062 (12-week holding cost — Story 1 only, not LP saving; see Section 11).80 | negligible | — |
 | Shipping cost | \$274,774.71 | \$8,629.13 | 96.9% |
-| Total | \$34,410,837.51 | \$8,629.13 | 99.97% |
+| Total | \$34,410,837 (combined holding + shipping baseline — NOT the LP saving; see Section 11).51 | \$8,629.13 | 99.97% |
 | Carbon | 22,781.11 kg | 643.94 kg | 97.2% |
 
 The \$34.4M baseline holding cost reflects 8.9M units held at
@@ -461,3 +461,89 @@ A 24-panel figure (4 rows × 6 columns) shows the complete forecast picture acro
 - East region consistently shows highest absolute demand across categories
 
 *final_report.md last updated: 2026-04-23 19:29 UTC*
+
+---
+
+## Section 11 — Two Cost Stories: Do Not Combine
+
+> **CRITICAL FRAMING NOTE**  
+> This project contains two separate cost problems.
+> They must never be added together or presented as a single saving.
+> The LP optimizer solves Story 2 only.
+
+---
+
+### Story 1 — Overstock Holding Cost (Capital Management Problem)
+
+| Metric | Value |
+|--------|-------|
+| Starting inventory | 8,926,517 units across 5 warehouses |
+| Daily holding cost | **\$406,381.70 / day** |
+| 12-week holding cost | \$406,381.70 × 84 days = **\$34,136,062.80** |
+| Warehouse utilisation | 998% – 1,604% (target: 100%) |
+| Avg days of cover | 11,461 days (target: 30 days) |
+| Root cause | Excess procurement — structural overstock |
+| LP solves this? | **NO** |
+| Recommended action | Staged inventory liquidation programme |
+
+The \$34,136,062.80 twelve-week holding cost is a capital management
+problem caused by excess stock levels, not by inefficient routing.
+The LP optimizer does not reduce this figure.
+It requires a separate operational programme:
+promotional markdown, returns to suppliers, or SKU rationalisation.
+
+---
+
+### Story 2 — LP Shipping Optimisation (Weekly Replenishment Routing)
+
+| Metric | Value |
+|--------|-------|
+| Weekly units to route | 5,585.88 units |
+| Unoptimised cost | \$4.20/unit × 5,585.88 = **\$23,460.70/week** |
+| Optimised cost | \$1.545/unit × 5,585.88 = **\$8,629.13/week** |
+| Weekly saving | **\$14,831.57/week (63.2% reduction)** |
+| Annual saving | \$14,831.57 × 52 = **\$770,841.64/year** |
+| Carbon baseline | 22,781.11 kg CO₂/week |
+| Carbon optimised | 643.94 kg CO₂/week |
+| Carbon saving | **22,137.17 kg (97.2% reduction)** |
+| LP solver | HiGHS via scipy.optimize.linprog (method=highs) |
+| Variables | 120 (5 WH × 4 regions × 6 categories) |
+| Constraints | 29 (24 demand + 5 capacity) |
+| Scenarios | A/B/C all OPTIMAL — Pareto collapse confirmed |
+| LP solves this? | **YES** |
+
+The LP optimizer minimises routing cost by assigning each
+demand region to its home-lane warehouse.
+Home-lane cost (\$1.50/unit) dominates all cross-lane alternatives
+(\$1.52–\$8.42/unit), producing a Pareto collapse:
+all three weight scenarios (cost-only, balanced, carbon-only)
+converge to identical allocations.
+
+---
+
+### Summary: What the LP Optimizer Does and Does Not Do
+
+| Question | Answer |
+|----------|--------|
+| Does LP reduce holding cost? | No — holding cost is a stock level problem |
+| Does LP reduce shipping cost? | Yes — 63.2% weekly reduction |
+| Does LP reduce carbon? | Yes — 97.2% per-week reduction |
+| Is \$34M the LP saving? | **No** — \$34M is 12-week holding cost, unrelated to routing |
+| What is the LP annual saving? | **\$770,842/year** from routing optimisation only |
+| Are Story 1 and Story 2 additive? | **No** — they are independent problems |
+
+---
+
+### Verification Checklist
+
+The following assertions hold throughout all project outputs:
+
+- [x] \$406,381.70/day is referenced as **holding cost only** (Story 1)
+- [x] \$14,831.57/week is referenced as **LP shipping saving only** (Story 2)
+- [x] \$770,841.64/year is attributed to **routing optimisation only**
+- [x] \$34,136,062.80 is described as **12-week holding cost**, never as LP saving
+- [x] The dashboard Tab 4 carries explicit Story 2 notice
+- [x] executive_memo.md separates the two stories
+- [x] assumptions_appendix.md documents both independently
+
+*Section 11 added: 2026-04-23 19:31 UTC*
