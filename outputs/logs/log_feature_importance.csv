@@ -1,0 +1,20 @@
+step,status,detail,value,timestamp
+load_data,OK,modeling_dataset rows,1540,2026-04-23T19:23:46.541227+00:00
+load_data,OK,modeling_dataset cols,42,2026-04-23T19:23:46.541227+00:00
+feature_selection,OK,numeric features used,36,2026-04-23T19:23:46.541227+00:00
+feature_selection,OK,rows after dropna,1444,2026-04-23T19:23:46.541227+00:00
+train_split,OK,train rows,1010,2026-04-23T19:23:46.541227+00:00
+train_split,OK,test rows,434,2026-04-23T19:23:46.541227+00:00
+model_train,OK,n_estimators,500,2026-04-23T19:23:46.541227+00:00
+metrics,OK,test_mae,12.4818,2026-04-23T19:23:46.541227+00:00
+metrics,OK,test_rmse,23.1769,2026-04-23T19:23:46.541227+00:00
+metrics,OK,test_r2,0.9494,2026-04-23T19:23:46.541227+00:00
+metrics,OK,test_wape_pct,8.78,2026-04-23T19:23:46.541227+00:00
+importance,OK,top_feature,category_velocity,2026-04-23T19:23:46.541227+00:00
+importance,OK,top_feature_pct,22.70,2026-04-23T19:23:46.541227+00:00
+importance,OK,lag_rolling_pct,29.17,2026-04-23T19:23:46.541227+00:00
+importance,OK,event_flags_pct,0.00,2026-04-23T19:23:46.541227+00:00
+importance,OK,total_features_ranked,36,2026-04-23T19:23:46.541227+00:00
+output,OK,feature_importance_csv_rows,36,2026-04-23T19:23:46.541227+00:00
+output,OK,figure1_size_bytes,199752,2026-04-23T19:23:46.541227+00:00
+output,OK,figure2_size_bytes,168978,2026-04-23T19:23:46.541227+00:00

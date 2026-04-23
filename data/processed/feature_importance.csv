@@ -1,0 +1,37 @@
+feature,importance,importance_pct,rank,category
+category_velocity,1427,22.69763003022109,1,Other
+weeks_since_epoch,686,10.911404485446159,2,Calendar
+week_number,637,10.132018450771433,3,Calendar
+weather_disruption,570,9.066327342134564,4,Other
+region_demand_rank,501,7.968824558613011,5,Other
+lag_2_week_demand,433,6.8872276125338,6,Lag / Rolling
+lag_1_week_demand,417,6.632734213456339,7,Lag / Rolling
+rolling_4wk_mean,361,5.742007316685224,8,Lag / Rolling
+rolling_4wk_std,275,4.374105296643868,9,Lag / Rolling
+lag_4_week_demand,272,4.326387784316845,10,Lag / Rolling
+avg_price_usd,161,2.5608398282169555,11,Cost / Volume
+demand_trend,155,2.4654048035629077,12,Other
+month,141,2.242723079370129,13,Calendar
+holiday_peak_flag,55,0.8748210593287736,14,Lag / Rolling
+avg_selling_price_usd,53,0.8430093844440909,15,Cost / Volume
+avg_unit_cost_usd,34,0.5407984730396056,16,Cost / Volume
+avg_cube_ft,22,0.34992842373150945,17,Other
+home_wh_capacity,18,0.2863050739621441,18,Other
+avg_gross_margin_usd,15,0.2385875616351201,19,Other
+quarter,13,0.20677588675043743,20,Calendar
+marketing_push_flag,11,0.17496421186575473,21,Lag / Rolling
+prime_event_flag,10,0.1590583744234134,22,Lag / Rolling
+avg_volume_m3,9,0.14315253698107205,23,Cost / Volume
+avg_margin_pct,4,0.06362334976936536,24,Other
+avg_holding_cost_daily,3,0.04771751232702402,25,Cost / Volume
+home_wh_fixed_cost,2,0.03181167488468268,26,Cost / Volume
+avg_stockout_penalty,2,0.03181167488468268,27,Other
+year,0,0.0,28,Calendar
+home_ship_cost,0,0.0,29,Cost / Volume
+carbon_kg_per_unit,0,0.0,30,Cost / Volume
+carbon_weight_tonnes,0,0.0,31,Cost / Volume
+carbon_distance_km,0,0.0,32,Cost / Volume
+home_distance_km,0,0.0,33,Other
+home_lead_time,0,0.0,34,Cost / Volume
+home_lane_efficiency,0,0.0,35,Other
+is_q4,0,0.0,36,Other
