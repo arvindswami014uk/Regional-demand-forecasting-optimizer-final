@@ -245,3 +245,73 @@ Amazon-Inspired Capstone Project — Outlier AI
 ---
 
 *Last updated: 2026-04-22*
+
+---
+
+## Block 1 — Gap Fills (commits 65d1ef7 – 386720c)
+
+| File | Description | Commit |
+|------|-------------|--------|
+| `data/processed/prophet_forecast.csv` | Prophet benchmark — 2,819 bytes | 65d1ef7 |
+| `data/processed/model_comparison.csv` | 4-model comparison table | 65d1ef7 |
+| `figures/forecast_model_comparison.png` | LightGBM vs Prophet vs Naive bar chart | 65d1ef7 |
+| `figures/prophet_vs_lgbm_forecast.png` | Overlay forecast chart | 65d1ef7 |
+| `reports/capstone_presentation.pptx` | 12-slide python-pptx deck | 5333900 |
+| `reports/supply_chain_queries.sql` | 8 supply chain SQL queries | 1a52d74 |
+| `reports/executive_memo.md` | Executive memo — 1,062 words | 386720c |
+| `reports/assumptions_appendix.md` | Assumptions appendix — 6 sections | 386720c |
+
+**Key Block 1 results:**
+- LightGBM WAPE 21.5% vs Prophet 33.8% vs Naive 69.9%
+- LightGBM beats Naive by +25.0% MAE / +69.3% WAPE
+- Prophet benchmark confirms LightGBM as production model
+
+---
+
+## Block 2 — Dashboard + Visualisations (commits b1b71f5 – present)
+
+| File | Description | Commit |
+|------|-------------|--------|
+| `reports/dashboard.html` | Interactive Plotly dashboard — 5 tabs, 4.43 MB | b1b71f5 |
+| `figures/lgbm_feature_importance.png` | Top-20 feature importance horizontal bar | 990044e |
+| `figures/lgbm_feature_importance_summary.png` | Category summary bar + top-10 pie | 990044e |
+| `data/processed/feature_importance.csv` | All 36 features ranked with importance % | 990044e |
+| `figures/forecast_24panel.png` | 24-panel forecast — 4 regions x 6 categories | 462bec5 |
+
+### Interactive Dashboard (`reports/dashboard.html`)
+
+Open in any browser — no Power BI or Tableau required.
+Single self-contained HTML file with embedded Plotly.js.
+
+| Tab | Title | Key Metric |
+|-----|-------|------------|
+| 1 | Regional Demand Overview — 81 Weeks | Holiday +64.8% \| Marketing +71.4% |
+| 2 | 12-Week Forward Forecast — LightGBM WAPE 21.5% | WAPE 21.5% \| R²=0.755 |
+| 3 | Warehouse Overstock — \$406,381/Day Holding Cost | 5 WH ALL CRITICAL |
+| 4 | LP Optimizer — 63.2% Shipping Cost Reduction | \$770,842/yr saving |
+| 5 | 100% Service Level — Zero Breaches — 24 Segments | 134 units SS |
+
+### Feature Importance Findings
+
+| Rank | Feature | Importance % | Category |
+|------|---------|-------------|----------|
+| 1 | category_velocity | 22.7% | Other |
+| 2 | weeks_since_epoch | 10.9% | Calendar |
+| 3 | week_number | 10.1% | Calendar |
+| 4 | weather_disruption | 9.1% | Other |
+| 5 | region_demand_rank | 8.0% | Other |
+| 6 | lag_2_week_demand | 6.9% | Lag/Rolling |
+| 7 | lag_1_week_demand | 6.6% | Lag/Rolling |
+
+Lag/Rolling features: 29.2% total importance — confirms 27-lag ACF/PACF structure.
+Calendar features: 23.5% — confirms week/seasonality effect.
+
+### 24-Panel Forecast (`figures/forecast_24panel.png`)
+
+- 4 rows (East, North, South, West) × 6 columns (BEAUTY, ELECTRONICS,
+  HOME, KITCHEN, PET, TOYS)
+- Each panel: actual demand (navy) + in-sample predicted (orange dashed)
+  + 12-week forward forecast (green) + 80% CI bands
+- Vertical dotted line separates historical from forward horizon
+
+*README last updated: 2026-04-23 19:29 UTC*

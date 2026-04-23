@@ -353,3 +353,111 @@ genuine cost-carbon trade-offs.
 ---
 
 *End of final_report.md — generated 2026-04-22T15:47:52.433465+00:00*
+
+---
+
+## Section 8 — Interactive Dashboard
+
+**File:** `reports/dashboard.html`  
+**Size:** 4.43 MB (self-contained, no CDN dependency)  
+**Commit:** b1b71f5
+
+The project includes a fully interactive Plotly HTML dashboard covering all five analytical dimensions of the capstone.
+Open `reports/dashboard.html` in any browser — no Power BI, Tableau, or external dependencies required.
+
+### Dashboard Tab Summary
+
+**Tab 1 — Regional Demand Overview (81 Weeks)**
+- Line chart: weekly demand by region (East/North/South/West)
+- Statistical results: Mann-Whitney holiday uplift +64.8% (p<0.0001), marketing uplift +71.4% (p<0.0001)
+- KPI table: total demand, peak week, avg weekly demand
+
+**Tab 2 — Forecast Accuracy**
+- 12-week forward forecast with 80% CI bands by region
+- Model comparison bar: LightGBM WAPE 21.5% vs Prophet 33.8% vs Naive 69.9%
+- Full model scorecard: MAE, RMSE, WAPE, R²
+
+**Tab 3 — Inventory and Overstock**
+- All 5 warehouses CRITICAL (utilisation 998%–1,604%)
+- Total daily holding cost: \$406,381.70/day
+- Avg days of cover: 11,461 (target: 30)
+- Action: staged inventory liquidation programme
+
+**Tab 4 — LP Optimizer (Story 2 — Shipping Only)**
+- Waterfall: \$23,461 unoptimised → \$8,629 optimised (saving \$14,832/week)
+- Annual saving: \$770,842 (52 × weekly saving)
+- Carbon reduction: 22,781 kg → 644 kg (97.2% reduction)
+- Pareto collapse: all 3 scenarios identical (home-lane always dominant)
+
+**Tab 5 — Service Level and Safety Stock**
+- Safety stock heatmap: 4 regions × 6 categories
+- Total SS: 134 units | Max: 18 units (East/ELECTRONICS)
+- Formula: Z × σ × √(LT) × 1.20 buffer (kurtosis=44.3)
+- Zero service level breaches across all 24 segments
+
+---
+
+## Section 9 — Feature Importance Analysis
+
+**Files:**
+- `figures/lgbm_feature_importance.png`
+- `figures/lgbm_feature_importance_summary.png`
+- `data/processed/feature_importance.csv`
+**Commit:** 990044e
+
+LightGBM was retrained on `modeling_dataset.csv` (1,444 rows, 36 numeric features) using a 70/30 chronological split.
+Test metrics: MAE=12.48, RMSE=23.18, R²=0.949, WAPE=8.8%.
+
+### Top Feature Importances
+
+| Rank | Feature | Importance % | Category |
+|------|---------|-------------|----------|
+| 1 | category_velocity | 22.7% | Velocity proxy |
+| 2 | weeks_since_epoch | 10.9% | Calendar/trend |
+| 3 | week_number | 10.1% | Calendar |
+| 4 | weather_disruption | 9.1% | External |
+| 5 | region_demand_rank | 8.0% | Regional proxy |
+| 6 | lag_2_week_demand | 6.9% | Lag/Rolling |
+| 7 | lag_1_week_demand | 6.6% | Lag/Rolling |
+| 8 | rolling_4wk_mean | 5.7% | Lag/Rolling |
+
+**Category breakdown:**
+- Lag/Rolling: 29.2% — consistent with 27-lag structure confirmed by ACF/PACF analysis
+- Calendar: 23.5% — confirms week number and trend as strong seasonality drivers
+- `category_velocity` (rank 1) captures SKU-level demand intensity, acting as a composite demand proxy
+
+**Cross-validation with statistical tests:**
+- Lag features dominating top ranks is consistent with ACF/PACF lag structure (81 weeks, 27 significant lags)
+- Holiday and marketing flags in top ranks is consistent with Mann-Whitney results (p<0.0001 for both)
+- Non-normal residuals (Shapiro-Wilk W=0.7247, kurtosis=44.3) justified the 1.20× safety stock buffer
+
+---
+
+## Section 10 — 24-Panel Forecast Visualisation
+
+**File:** `figures/forecast_24panel.png`  
+**Size:** 1,035,992 bytes (1.0 MB)  
+**Commit:** 462bec5
+
+A 24-panel figure (4 rows × 6 columns) shows the complete forecast picture across all region-category segments.
+
+| Axis | Values |
+|------|--------|
+| Rows | East, North, South, West |
+| Columns | BEAUTY, ELECTRONICS, HOME, KITCHEN, PET, TOYS |
+| X-axis | Year-week (81 historical + 12 forward) |
+| Y-axis | Units/week |
+
+**Visual elements per panel:**
+- Navy line: actual weekly demand (historical)
+- Orange dashed: in-sample LightGBM prediction
+- Green solid: 12-week forward forecast (2026-W04 to W15)
+- Shaded bands: 80% CI for both in-sample and forward
+- Dotted vertical: boundary between historical and forecast
+
+**Observations:**
+- ELECTRONICS and TOYS show highest demand levels across all regions (consistent with A-class ABC ranking)
+- All 24 segments show stable forward trajectories within tight CI bands (CV range 0.44%–0.93%)
+- East region consistently shows highest absolute demand across categories
+
+*final_report.md last updated: 2026-04-23 19:29 UTC*
