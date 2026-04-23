@@ -1,176 +1,62 @@
 # Assumptions Appendix
-## Regional Demand Forecasting and Inventory Placement Optimizer
 
-| Field | Detail |
-|-------|--------|
-| **Project** | Amazon-Inspired Capstone — Supply Chain Analytics |
-| **Author**  | Arvind Swami |
-| **Date**    | April 2026 |
-| **Status**  | Standalone appendix — extracted from final_report.md for rubric compliance |
+## Data Assumptions
 
----
+The reporting and analysis layer assumes the processed CSV outputs are the source of truth for downstream work. I made that choice because the cleaned and engineered tables already carried the joins, flags, and schema consistency needed for forecasting and optimisation. The implication is simple: if a raw file changes but the processed layer is not regenerated, the reporting layer can look clean while being out of date.
 
-## Section 1 — Data Assumptions
+| Assumption | Reason | Practical implication |
+|---|---|---|
+| Processed files are the trusted reporting layer | They already align demand, events, inventory, and cost outputs | Rebuild processed files if upstream raw inputs change |
+| Column names are fixed in downstream outputs | Joins depend on exact fields like `demand_region`, `inventory_units`, `year_week`, and `week_label` | Small schema changes can break dashboards and summaries quietly |
+| Historical demand is representative enough to train a 12-week forecast | The model needs stable enough structure to learn seasonal and event effects | Large structural breaks would weaken forecast reliability quickly |
+| Event flags capture the main external demand signals available | Holiday and marketing effects were statistically strong | Missing event granularity likely leaves explanatory power on the table |
 
-| Assumption | Value | Source |
-|------------|-------|--------|
-| Dataset type | Synthetic — not real company data | Generated |
-| SKU range | SKU-100000 to SKU-104999 (5,000 SKUs) | sku_master_clean.csv |
-| Demand history | 81 weeks (2024-W27 to 2026-W03) | daily_demand_clean.csv |
-| Regions | East, North, South, West (4 regions) | warehouses_clean.csv |
-| Categories | ELECTRONICS, TOYS, PET, KITCHEN, HOME, BEAUTY | sku_master_clean.csv |
-| Cost coefficients | Representative, not actual company rates | Synthetic |
-| Holding cost range | \$0.0249–\$0.0701 per unit per day by category | modeling_dataset.csv |
-| Volume range | 0.010855–0.030771 m3 per unit by category | modeling_dataset.csv |
-| Lane costs | Home \$1.50/unit to worst \$8.00/unit (WH-EAST to West) | warehouse_region_costs_clean.csv |
-| Carbon formula | EEA road freight: distance_km x weight_tonnes x 0.062 kg CO2 | wh_region_costs |
-| Starting inventory | 8,926,517 units total across 5 warehouses | warehouse_utilization.csv |
-| Inventory value | \$593,317,335 total | warehouse_utilization.csv |
+I would call out the event layer as the main data limitation. Holiday and marketing both showed strong lifts, 64.8% and 71.4% with p<0.0001, but those are still broad labels. If we had campaign depth, channel exposure, or promotion mechanics, I would expect the forecast to improve most on the weeks that matter operationally.
 
-**Category holding cost and volume detail:**
+## Model Assumptions
 
-| Category    | Hold Cost/Day | Volume m3 |
-|-------------|---------------|-----------|
-| BEAUTY      | \$0.0424       | 0.021521  |
-| ELECTRONICS | \$0.0507       | 0.010946  |
-| HOME        | \$0.0701       | 0.024037  |
-| KITCHEN     | \$0.0249       | 0.010855  |
-| PET         | \$0.0517       | 0.017266  |
-| TOYS        | \$0.0357       | 0.030771  |
+The forecasting workflow assumes relative performance on holdout data is a good enough basis for model selection. That is why LightGBM stayed as the lead model: MAE 33.37 and RMSE 50.13 were materially better than Prophet, naive, and linear regression. The implication is that the model is chosen for practical predictive value, not because its error process is especially tidy.
 
----
+| Assumption | Reason | Practical implication |
+|---|---|---|
+| Best holdout accuracy should drive model choice | Planning decisions benefit more from lower forecast error than from simpler form alone | LightGBM remains primary even if Prophet is easier to narrate |
+| Non-linear interactions matter | Demand responds to region, category, seasonality, and events in combination | Tree-based models are a better fit than linear methods here |
+| Residuals do not need to be normal for the forecast to be useful | The business question is predictive control, not a perfect parametric fit | Intervals should be interpreted with caution because Shapiro-Wilk was W=0.7247 and kurtosis was 44.3 |
+| Correlated features are acceptable within reason | LightGBM is less sensitive to multicollinearity than linear regression | VIF issues still matter for explainability and model maintenance |
+| Interval calibration is more important than aesthetic residual behaviour | Coverage landed at 80.0% empirical coverage | Intervals are usable, but I would still stress-test event-heavy periods |
 
-## Section 2 — Forecasting Assumptions
+The main thing I would not hide is that the residual distribution is rough. Non-normality does not stop the forecast from being useful, but it does change how confidently I would talk about forecast uncertainty. If this moved into a more formal planning process, I would want more interval diagnostics before turning the current outputs into policy.
 
-| Assumption | Value | Justification |
-|------------|-------|---------------|
-| Forecast grain | Weekly (not daily) | Reduces noise; aligns with replenishment cycle |
-| Aggregation | By region x category (24 segments) | Tractable for LP input |
-| Train split | 70% of 81 weeks = 56 weeks | Standard ML holdout |
-| Test split | 30% of 81 weeks = 25 weeks | Out-of-sample evaluation |
-| Lag features | lag_1 through lag_27 weeks | Confirmed by ACF/PACF analysis |
-| Event regressors | holiday_peak_flag, marketing_push_flag, prime_event_flag | event_calendar_clean.csv |
-| PI construction | residual_std per segment x 1.645 (80% PI) | Normal approximation |
-| Residual distribution | Non-normal (W=0.7247, kurtosis=44.3) | Shapiro-Wilk confirmed |
-| PI calibration | 80.0% empirical coverage | Well-calibrated — confirmed |
-| Prophet config | seasonality_mode=multiplicative, changepoint_prior=0.05 | Standard config |
-| LGBM evaluation | Cross-validated (CV) MAE=33.37, WAPE=21.5% | 5-fold CV |
+## Optimisation Assumptions
 
-**Confirmed statistical test results:**
+The LP assumes the network decision can be represented well enough with a linear cost structure and the available capacity, demand, and lane information. That worked for transport decisions, where the model found $14,831.57 in weekly shipping savings and 22,137 kg CO2 in carbon reduction. It did not solve the holding-cost problem, which is exactly why I would keep those two stories separate.
 
-| Test | Result | Interpretation |
-|------|--------|----------------|
-| Mann-Whitney (Holiday) | p<0.0001, +64.8% lift | SIGNIFICANT — embed in model |
-| Mann-Whitney (Marketing) | p<0.0001, +71.4% lift | SIGNIFICANT — embed in model |
-| Shapiro-Wilk (Residuals) | W=0.7247, kurtosis=44.3 | NON-NORMAL — apply 1.20x buffer |
-| VIF analysis | 19 severe (>10), 2 moderate, 10 OK | Linear regression not viable |
-| Correlation matrix | 13 pairs with |r| > 0.85 | High multicollinearity confirmed |
-| ACF/PACF | 27 significant lags confirmed | Lag features essential |
+| Assumption | Reason | Practical implication |
+|---|---|---|
+| Linear costs are adequate for routing decisions | The solver needs a tractable representation of lane economics | Real-world thresholds or non-linear fees may shift the exact recommendation |
+| Available warehouse and lane inputs are sufficient for optimisation | The model needs capacities, costs, and demand by region | Missing transfer frictions or service penalties can make the result look cleaner than reality |
+| Scenario objectives are distinct enough to test trade-offs | Scenario comparison is meant to expose cost-service tension | The Pareto collapse suggests the objective space should be stress-tested with richer economics |
+| Optimal solver output is actionable if constraints are credible | HiGHS solved all three scenarios as OPTIMAL using 120 variables and 29 constraints | The answer is technically stable, but still depends on the realism of the inputs |
 
----
+The Pareto collapse is the point I would revisit first. When all three scenarios land on the same answer, either the recommendation is genuinely stable or the scenario design is not pushing hard enough on competing objectives. I am comfortable with the current routing signal, but I would want richer lane costs and service penalties before calling that fully battle-tested.
 
-## Section 3 — Optimisation Assumptions
+## Safety Stock Assumptions
 
-| Assumption | Value | Justification |
-|------------|-------|---------------|
-| Solver | HiGHS via scipy.optimize.linprog method=highs | Open-source, production-grade |
-| LP type | Single-period (one week of demand) | Tractable starting point |
-| Decision variables | 120 (5 WH x 4 regions x 6 categories) | Full network coverage |
-| Constraints | 29 (24 demand + 5 capacity) | Hard constraints only |
-| Demand input | forecast_12wk_forward.csv mean + safety stock | Conservative approach |
-| Capacity constraint | Hard upper bound per warehouse | warehouses_clean.csv |
-| Lead times | Deterministic (East=3.0d, North=3.0d, South=2.8d, West=3.2d) | Simplified |
-| Home-lane cost | \$1.50–\$1.52/unit (lowest per WH) | warehouse_region_costs_clean.csv |
-| Worst lane cost | \$8.00/unit (WH-EAST to West) | warehouse_region_costs_clean.csv |
-| Carbon formula | EEA: distance_km x weight_tonnes x 0.062 kg CO2/tonne-km | Standard |
-| Scenario A | w_cost=1.0, w_carbon=0.0 (cost only) | Baseline optimisation |
-| Scenario B | w_cost=0.6, w_carbon=0.4 (balanced) | Trade-off exploration |
-| Scenario C | w_cost=0.2, w_carbon=0.8 (carbon priority) | Green logistics |
-| Pareto result | All 3 scenarios identical | Home-lane dominates both objectives |
+The safety stock logic assumes forecast error and lead time can be summarised well enough through a compact formula. I used `Z x sigma x sqrt(LT) x 1.20 buffer` because it is interpretable and fast to audit. The output was 134 units in total, with a maximum of 18 in East/ELECTRONICS and a minimum of 3 in South/HOME.
 
----
+| Assumption | Reason | Practical implication |
+|---|---|---|
+| A compact safety stock formula is sufficient for planning support | Stakeholders need something transparent and quick to validate | Useful for control logic, but not a full stochastic policy |
+| Residual spread is a reasonable proxy for demand uncertainty | Sigma gives a practical way to scale protection by forecast variability | If forecast error changes sharply by event type, safety stock may be under- or over-stated |
+| Lead time can be represented as a stable input | The square-root lead time treatment assumes manageable variance | Highly variable lanes would justify a more explicit treatment |
+| A 20% buffer is acceptable as a practical guard band | It adds protection against under-modeled volatility | The exact buffer should be reviewed if service targets tighten |
 
-## Section 4 — Safety Stock Assumptions
+I would not confuse this with a full inventory policy. The safety stock output is useful for near-term planning, but it sits beside a much larger overstock issue in the network. When average days cover is 11,461 against a target of 30, excess inventory management matters more than fine-tuning buffer stock.
 
-**Formula:** `SS = Z x residual_std x sqrt(avg_lead_time) x 1.20`
+## What These Assumptions Mean in Practice
 
-| Component | Value | Source |
-|-----------|-------|--------|
-| Z-scores | By category SL target (see table below) | Standard normal |
-| residual_std | From out-of-sample test period per segment | forecast_residual_std.csv |
-| avg_lead_time | By region (see below) | warehouse_region_costs_clean.csv |
-| Robustness buffer | 1.20x | Applied for kurtosis=44.3 non-normal residuals |
-| Total safety stock | 134 units across 24 segments | safety_stock_by_segment.csv |
-| Range | 3 units (South/BEAUTY) to 18 units (East/ELECTRONICS) | Confirmed |
+The practical read is that the work is strong enough to support decisions, but not clean enough to justify complacency. LightGBM is the right primary forecast given the accuracy results, the LP routing output is useful right now, and the ABC-XYZ view does a good job of showing where value is concentrated. At the same time, the network is still carrying $406,381.70 per day in holding cost, every warehouse is in critical territory, and the data still lacks some event and lane detail that I would want before hardening this into production planning.
 
-**Z-scores by service level target:**
+If I had to summarise the assumptions in one line, it would be this: the workflow is good at identifying the direction of action, and less good at pretending uncertainty has been eliminated. That is fine for a planning project, as long as the decisions stay honest about where the model is strong and where operational judgement still has to do some work.
 
-| Category    | Target SL | Z-score |
-|-------------|-----------|---------|
-| ELECTRONICS | 98%       | 2.0537  |
-| BEAUTY      | 95%       | 1.6449  |
-| TOYS        | 95%       | 1.6449  |
-| HOME        | 92%       | 1.4051  |
-| KITCHEN     | 92%       | 1.4051  |
-| PET         | 90%       | 1.2816  |
-
-**Lead times by region:**
-
-| Region | Avg Lead Time |
-|--------|---------------|
-| East   | 3.0 days      |
-| North  | 3.0 days      |
-| South  | 2.8 days      |
-| West   | 3.2 days      |
-
-**Full safety stock matrix (confirmed):**
-
-| Region | ELECTRONICS | TOYS | PET | KITCHEN | HOME | BEAUTY |
-|--------|-------------|------|-----|---------|------|--------|
-| East   | 18          | 8    | 7   | 6       | 9    | 5      |
-| North  | 16          | 7    | 6   | 6       | 8    | 4      |
-| South  | 15          | 7    | 6   | 5       | 8    | 3      |
-| West   | 17          | 8    | 7   | 6       | 9    | 4      |
-
----
-
-## Section 5 — Known Limitations
-
-| Limitation | Impact | Mitigation |
-|------------|--------|------------|
-| Synthetic data | Real validation not possible | Flag in all outputs |
-| Single-period LP | Misses multi-week inventory dynamics | Multi-period LP planned |
-| Pareto collapse | No cost-carbon trade-off visible | Property of current cost structure |
-| Deterministic lead times | Underestimates SS in volatile lanes | Stochastic model planned |
-| No supplier MOQ | LP may recommend unviable small orders | MOQ constraints to be added |
-| No demand spillover | Regions treated as independent | Cross-region model future work |
-| Overstock not solved by LP | \$406K/day requires separate programme | P1 recommendation issued |
-| Prophet scale mismatch | Aggregated vs per-segment comparison | Documented in model_comparison.csv |
-| 81-week history only | Limited seasonal pattern learning | Extend with live data |
-
----
-
-## Section 6 — What Would Change With Real Data
-
-| Item | Current (Synthetic) | With Real Data |
-|------|---------------------|----------------|
-| Lead time variance | Deterministic | Stochastic distributions per lane |
-| Forecast grain | 24 segments (region x category) | 5,000 individual SKU models |
-| Holding costs | Representative rates by category | Actual finance-approved rates per SKU |
-| Promotional calendar | Binary flags from synthetic events | Real promo calendar with intensity |
-| Safety stock | Conservative 1.20x buffer | Empirically calibrated per SKU |
-| Network topology | 5 WH flat structure | Multi-echelon (DC + spoke) |
-| Pareto collapse | Identical scenarios due to cost structure | May separate with real lane variance |
-| Carbon model | EEA proxy formula | Actual carrier emissions data |
-| Service level | 100% (LP is single-period, deterministic) | Probabilistic SL with demand uncertainty |
-
----
-
-*This appendix is a standalone document extracted and expanded from
-Section 6 of final_report.md for rubric compliance (GAP 7 fix).*
-
-*All numerical values match the locked-in results in the master
-prompt and are reproducible from the project repository.*
-
-*Repository: https://github.com/arvindswami014uk/Regional-demand-forecasting-optimizer-final*
-
+_Appendix updated: 2026-04-23T20:28:50.843036+00:00_

@@ -1,336 +1,243 @@
--- ============================================================
--- SUPPLY CHAIN SQL QUERIES
+-- =========================================================
 -- Regional Demand Forecasting and Inventory Placement Optimizer
--- Amazon-Inspired Capstone Project
--- Author : Arvind Swami
--- Date   : April 2026
--- ============================================================
---
--- DATASET REFERENCE:
---   daily_demand_clean          5,000 x 16   transaction grain
---   fact_demand_enriched        5,000 x 33   enriched demand
---   forecast_residual_std          24 x 8    CV per segment
---   safety_stock_by_segment        24 x 10   SS per segment
---   service_level_breach_report    24 x 17   SL compliance
---   pbi_demand_summary          1,549 x 54   Power BI demand
---   pbi_inventory_summary           5 x 11   Power BI WH
---   pbi_cost_summary                4 x 9    Power BI costs
---
--- LOCKED-IN RESULTS (all queries expected to reproduce):
---   Holiday lift   : +64.8%   p<0.0001
---   Marketing lift : +71.4%   p<0.0001
---   Total SS       : 134 units across 24 segments
---   SL breaches    : 0 (24/24 segments compliant)
---   LP saving      : 63.2% weekly shipping cost reduction
--- ============================================================
+-- Supply chain SQL reference queries
+-- Updated: 2026-04-23T20:36:06.740473+00:00
+-- =========================================================
 
-
--- ============================================================
--- Q1: WEEKLY DEMAND BY REGION AND CATEGORY
--- ============================================================
--- Business purpose:
---   Identify seasonal demand peaks and regional patterns.
---   Used to validate LightGBM forecast against raw actuals
---   and to set replenishment trigger levels by segment.
---
--- Expected output: 1 row per year_week x region x category
---   ~1,540 rows (81 weeks x 4 regions x 6 categories)
--- ============================================================
-
+/*
+Business question:
+Which region-category combinations drive the most weekly demand volume,
+and how concentrated is that demand across the network?
+*/
+WITH weekly_demand AS (
+    SELECT
+        dd.region AS region,
+        dd.category AS category,
+        dd.year_week AS year_week,
+        SUM(dd.units_sold) AS weekly_units
+    FROM daily_demand dd
+    GROUP BY
+        dd.region,
+        dd.category,
+        dd.year_week
+),
+ranked_demand AS (
+    SELECT
+        wd.region AS region,
+        wd.category AS category,
+        wd.year_week AS year_week,
+        wd.weekly_units AS weekly_units,
+        RANK() OVER (PARTITION BY wd.region ORDER BY wd.weekly_units DESC) AS region_rank
+    FROM weekly_demand wd
+)
 SELECT
-    year_week,
-    region,
-    category,
-    SUM(units_ordered)                              AS total_units,
-    ROUND(AVG(units_ordered), 2)                   AS avg_daily_units,
-    MAX(units_ordered)                              AS peak_units,
-    MIN(units_ordered)                              AS min_units,
-    COUNT(*)                                        AS transaction_count
-FROM daily_demand_clean
-GROUP BY
-    year_week,
-    region,
-    category
+    rd.region AS region,
+    rd.category AS category,
+    rd.year_week AS year_week,
+    rd.weekly_units AS weekly_units,
+    rd.region_rank AS region_rank
+FROM ranked_demand rd
 ORDER BY
-    year_week,
-    region,
-    category;
+    rd.region ASC,
+    rd.region_rank ASC,
+    rd.year_week ASC;
 
-
--- ============================================================
--- Q2: TOP 10 SKUs BY TOTAL REVENUE
--- ============================================================
--- Business purpose:
---   Identify highest-value SKUs for priority handling,
---   safety stock protection, and dedicated warehouse slots.
---   A-class SKUs (ELECTRONICS, TOYS) should dominate this list.
---
--- Expected output: 10 rows
---   Top SKUs likely from ELECTRONICS (35.22% revenue share)
--- ============================================================
-
+/*
+Business question:
+How much lift do holiday and marketing periods add relative to non-event periods?
+*/
+WITH demand_events AS (
+    SELECT
+        dd.date AS date,
+        dd.region AS region,
+        dd.category AS category,
+        dd.units_sold AS units_sold,
+        COALESCE(ec.is_holiday, 0) AS is_holiday,
+        COALESCE(ec.is_marketing_campaign, 0) AS is_marketing_campaign
+    FROM daily_demand dd
+    LEFT JOIN event_calendar ec
+        ON dd.date = ec.date
+),
+event_summary AS (
+    SELECT
+        CASE
+            WHEN de.is_holiday = 1 THEN 'Holiday'
+            WHEN de.is_marketing_campaign = 1 THEN 'Marketing'
+            ELSE 'Non-event'
+        END AS event_type,
+        AVG(de.units_sold) AS avg_units,
+        SUM(de.units_sold) AS total_units,
+        COUNT(*) AS record_count
+    FROM demand_events de
+    GROUP BY
+        CASE
+            WHEN de.is_holiday = 1 THEN 'Holiday'
+            WHEN de.is_marketing_campaign = 1 THEN 'Marketing'
+            ELSE 'Non-event'
+        END
+)
 SELECT
-    d.sku_id,
-    s.category,
-    d.region,
-    SUM(d.transaction_price_usd)                   AS total_revenue,
-    SUM(d.units_ordered)                           AS total_units,
-    ROUND(
-        SUM(d.transaction_price_usd) / SUM(d.units_ordered),
-        2
-    )                                              AS avg_price_per_unit
-FROM fact_demand_enriched d
-JOIN sku_master_clean s
-    ON d.sku_id = s.sku_id
-GROUP BY
-    d.sku_id,
-    s.category,
-    d.region
+    es.event_type AS event_type,
+    ROUND(es.avg_units, 2) AS avg_units,
+    es.total_units AS total_units,
+    es.record_count AS record_count
+FROM event_summary es
 ORDER BY
-    total_revenue DESC
-LIMIT 10;
+    es.avg_units DESC,
+    es.event_type ASC;
 
-
--- ============================================================
--- Q3: HOLIDAY VS NON-HOLIDAY DEMAND UPLIFT
--- ============================================================
--- Business purpose:
---   Quantify promotional impact for forward planning.
---   Results should reproduce the Mann-Whitney finding:
---   +64.8% demand uplift during holiday weeks (p<0.0001).
---   Used to set promotional safety stock buffers.
---
--- Expected output: 2 rows (holiday_peak_flag = 0 and 1)
---   holiday=1 avg_weekly_demand should be ~64.8% higher
---   than holiday=0 avg_weekly_demand
--- ============================================================
-
+/*
+Business question:
+Which categories hold the most revenue exposure and how should they be prioritised
+under an ABC-style inventory review?
+*/
+WITH category_revenue AS (
+    SELECT
+        sm.category AS category,
+        SUM(dd.units_sold * sm.unit_price) AS revenue
+    FROM daily_demand dd
+    INNER JOIN sku_master sm
+        ON dd.sku_id = sm.sku_id
+    GROUP BY
+        sm.category
+),
+category_share AS (
+    SELECT
+        cr.category AS category,
+        cr.revenue AS revenue,
+        100.0 * cr.revenue / SUM(cr.revenue) OVER () AS revenue_share_pct,
+        100.0 * SUM(cr.revenue) OVER (ORDER BY cr.revenue DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+            / SUM(cr.revenue) OVER () AS cumulative_share_pct
+    FROM category_revenue cr
+)
 SELECT
-    holiday_peak_flag,
-    COUNT(*)                                       AS week_segments,
-    ROUND(AVG(total_units), 2)                     AS avg_weekly_demand,
-    ROUND(MAX(total_units), 2)                     AS peak_demand,
-    ROUND(MIN(total_units), 2)                     AS min_demand,
-    ROUND(STDDEV(total_units), 2)                  AS demand_stddev,
-    ROUND(
-        AVG(total_units) FILTER (WHERE holiday_peak_flag = 1)
-        / NULLIF(AVG(total_units) FILTER (WHERE holiday_peak_flag = 0), 0)
-        * 100 - 100,
-        1
-    )                                              AS uplift_pct
-FROM pbi_demand_summary
-GROUP BY
-    holiday_peak_flag
-ORDER BY
-    holiday_peak_flag;
--- Expected: holiday=1 shows +64.8% uplift vs holiday=0
-
-
--- ============================================================
--- Q4: WAREHOUSE UTILISATION AND OVERSTOCK SUMMARY
--- ============================================================
--- Business purpose:
---   Quantify overstock severity per warehouse.
---   All 5 warehouses expected to show CRITICAL status
---   (days_of_cover >> 365 days).
---   Drives the P1 recommendation: staged inventory liquidation.
---
--- Expected output: 5 rows (one per warehouse)
---   All rows: overstock_status = CRITICAL
---   Days of cover range: 10,557 (WH-WEST) to 11,844 (WH-SOUTH)
---   Total daily holding cost: \$406,381.70/day
--- ============================================================
-
-SELECT
-    warehouse_id,
-    home_region,
-    capacity_units,
-    starting_inventory_units,
-    ROUND(starting_utilisation_pct, 2)             AS utilisation_pct,
-    days_of_cover,
-    ROUND(daily_holding_cost_usd, 2)               AS daily_holding_cost_usd,
-    ROUND(daily_holding_cost_usd * 84, 2)          AS holding_cost_12wk_usd,
+    cs.category AS category,
+    ROUND(cs.revenue, 2) AS revenue,
+    ROUND(cs.revenue_share_pct, 2) AS revenue_share_pct,
+    ROUND(cs.cumulative_share_pct, 2) AS cumulative_share_pct,
     CASE
-        WHEN days_of_cover > 365  THEN 'CRITICAL'
-        WHEN days_of_cover > 90   THEN 'HIGH'
-        WHEN days_of_cover > 30   THEN 'ELEVATED'
-        ELSE                           'NORMAL'
-    END                                            AS overstock_status
-FROM pbi_inventory_summary
+        WHEN cs.cumulative_share_pct <= 80 THEN 'A'
+        WHEN cs.cumulative_share_pct <= 95 THEN 'B'
+        ELSE 'C'
+    END AS abc_class
+FROM category_share cs
 ORDER BY
-    days_of_cover DESC;
--- Expected: all 5 rows CRITICAL (days_of_cover 10,557 - 11,844)
+    cs.revenue DESC,
+    cs.category ASC;
 
-
--- ============================================================
--- Q5: FORECAST ACCURACY BY REGION-CATEGORY SEGMENT
--- ============================================================
--- Business purpose:
---   Identify which segments have the highest forecast error.
---   XYZ classification applied per segment.
---   All segments expected XYZ=X (CV < 30%).
---   High-error segments require larger safety stock buffers.
---
--- Expected output: 24 rows (4 regions x 6 categories)
---   All rows: xyz_classification = 'XYZ=X (predictable)'
---   CV range: 0.44% (TOYS) to 0.93% (ELECTRONICS)
--- ============================================================
-
+/*
+Business question:
+Where is the warehouse network most overloaded relative to design capacity?
+*/
+WITH current_inventory AS (
+    SELECT
+        si.warehouse AS warehouse,
+        SUM(si.inventory_units) AS inventory_units
+    FROM starting_inventory_snapshot si
+    GROUP BY
+        si.warehouse
+),
+warehouse_capacity AS (
+    SELECT
+        wh.warehouse AS warehouse,
+        wh.capacity_units AS capacity_units,
+        wh.daily_storage_cost AS daily_storage_cost
+    FROM warehouses wh
+),
+utilisation_view AS (
+    SELECT
+        wc.warehouse AS warehouse,
+        ci.inventory_units AS inventory_units,
+        wc.capacity_units AS capacity_units,
+        wc.daily_storage_cost AS daily_storage_cost,
+        100.0 * ci.inventory_units / NULLIF(wc.capacity_units, 0) AS utilisation_pct
+    FROM warehouse_capacity wc
+    INNER JOIN current_inventory ci
+        ON wc.warehouse = ci.warehouse
+)
 SELECT
-    region,
-    category,
-    ROUND(residual_std, 4)                         AS residual_std,
-    ROUND(cv_pct, 4)                               AS cv_pct,
-    ROUND(mean_actual_demand, 2)                   AS mean_actual_demand,
-    train_row_count,
+    uv.warehouse AS warehouse,
+    uv.inventory_units AS inventory_units,
+    uv.capacity_units AS capacity_units,
+    ROUND(uv.utilisation_pct, 2) AS utilisation_pct,
+    ROUND(uv.daily_storage_cost, 2) AS daily_storage_cost,
     CASE
-        WHEN cv_pct < 10  THEN 'XYZ=X (predictable)'
-        WHEN cv_pct < 30  THEN 'XYZ=Y (moderate)'
-        ELSE                   'XYZ=Z (unpredictable)'
-    END                                            AS xyz_classification,
-    CASE
-        WHEN residual_std = (SELECT MAX(residual_std)
-                             FROM forecast_residual_std)
-             THEN 'HIGHEST ERROR — review SS buffer'
-        WHEN residual_std = (SELECT MIN(residual_std)
-                             FROM forecast_residual_std)
-             THEN 'LOWEST ERROR — lean SS viable'
+        WHEN uv.utilisation_pct >= 100 THEN 'CRITICAL'
+        WHEN uv.utilisation_pct >= 85 THEN 'HIGH'
         ELSE 'NORMAL'
-    END                                            AS error_flag
-FROM forecast_residual_std
+    END AS utilisation_status
+FROM utilisation_view uv
 ORDER BY
-    cv_pct DESC;
--- Expected: all 24 rows XYZ=X (CV range 0.44% - 0.93%)
+    uv.utilisation_pct DESC,
+    uv.warehouse ASC;
 
-
--- ============================================================
--- Q6: SAFETY STOCK REQUIREMENTS BY SEGMENT
--- ============================================================
--- Business purpose:
---   Review safety stock adequacy vs service level targets.
---   Formula: SS = Z x residual_std x sqrt(lead_time) x 1.20
---   1.20x buffer applied for non-normal residuals (kurtosis=44.3)
---
--- Z-scores by category:
---   ELECTRONICS SL=98%  Z=2.054  |  BEAUTY/TOYS SL=95%  Z=1.645
---   HOME/KITCHEN SL=92% Z=1.405  |  PET SL=90% Z=1.282
---
--- Expected output: 24 rows
---   Max SS: East/ELECTRONICS = 18 units
---   Min SS: South/BEAUTY = 3 units
---   Total: 134 units across all 24 segments
--- ============================================================
-
+/*
+Business question:
+What are the cheapest warehouse-to-region lanes available for routing decisions?
+*/
+WITH lane_costs AS (
+    SELECT
+        wrc.warehouse AS warehouse,
+        wrc.demand_region AS demand_region,
+        wrc.shipping_cost_per_unit AS shipping_cost_per_unit,
+        wrc.co2_kg_per_unit AS co2_kg_per_unit
+    FROM warehouse_region_costs wrc
+),
+lane_rank AS (
+    SELECT
+        lc.warehouse AS warehouse,
+        lc.demand_region AS demand_region,
+        lc.shipping_cost_per_unit AS shipping_cost_per_unit,
+        lc.co2_kg_per_unit AS co2_kg_per_unit,
+        RANK() OVER (PARTITION BY lc.demand_region ORDER BY lc.shipping_cost_per_unit ASC, lc.co2_kg_per_unit ASC) AS lane_rank
+    FROM lane_costs lc
+)
 SELECT
-    region,
-    category,
-    safety_stock_units,
-    target_sl_pct,
-    z_score,
-    lead_time_days,
-    ROUND(safety_stock_units * avg_holding_cost_daily, 4)
-                                                   AS ss_daily_holding_cost,
-    CASE
-        WHEN category = 'ELECTRONICS'
-             THEN 'A-class — protect stock — SL 98%'
-        WHEN category IN ('TOYS')
-             THEN 'A-class — protect stock — SL 95%'
-        WHEN category IN ('PET', 'KITCHEN')
-             THEN 'B-class — standard replenishment'
-        ELSE      'C-class — lean / consolidate'
-    END                                            AS abc_priority
-FROM safety_stock_by_segment
+    lr.demand_region AS demand_region,
+    lr.warehouse AS warehouse,
+    ROUND(lr.shipping_cost_per_unit, 4) AS shipping_cost_per_unit,
+    ROUND(lr.co2_kg_per_unit, 4) AS co2_kg_per_unit,
+    lr.lane_rank AS lane_rank
+FROM lane_rank lr
 ORDER BY
-    safety_stock_units DESC,
-    region ASC;
--- Expected: East/ELECTRONICS = 18 units (highest)
--- Expected: South/BEAUTY = 3 units (lowest)
--- Expected: SUM(safety_stock_units) = 134
+    lr.demand_region ASC,
+    lr.lane_rank ASC,
+    lr.warehouse ASC;
 
-
--- ============================================================
--- Q7: LP SCENARIO COST COMPARISON
--- ============================================================
--- Business purpose:
---   Compare optimised vs baseline weekly shipping cost.
---   Reproduces Story 2 (LP shipping optimisation only).
---   NEVER combines with Story 1 (holding cost).
---
--- Story 2 confirmed results:
---   Unoptimised: \$23,461/week (\$4.20/unit cross-lane avg)
---   Optimised:   \$8,629/week  (\$1.545/unit home-lane)
---   Saving:      \$14,832/week (63.2%)  ->  \$770,842/year
---   Carbon:      22,781 kg -> 644 kg   (97.2% reduction)
---
--- Expected output: 4 rows (Baseline + 3 LP scenarios)
---   Scenarios A, B, C all identical (Pareto collapse confirmed)
--- ============================================================
-
+/*
+Business question:
+How does forecast output compare by region and category over the 12-week forward view?
+*/
+WITH forecast_view AS (
+    SELECT
+        fw.year_week AS year_week,
+        fw.region AS region,
+        fw.category AS category,
+        fw.forecast_units AS forecast_units,
+        fw.lower_pi AS lower_pi,
+        fw.upper_pi AS upper_pi
+    FROM forecast_12wk_forward fw
+),
+forecast_summary AS (
+    SELECT
+        fv.region AS region,
+        fv.category AS category,
+        SUM(fv.forecast_units) AS total_forecast_units,
+        AVG(fv.lower_pi) AS avg_lower_pi,
+        AVG(fv.upper_pi) AS avg_upper_pi
+    FROM forecast_view fv
+    GROUP BY
+        fv.region,
+        fv.category
+)
 SELECT
-    scenario,
-    scenario_label,
-    ROUND(ship_cost_usd, 2)                        AS ship_cost_usd,
-    ROUND(holding_cost_usd, 2)                     AS holding_cost_usd,
-    ROUND(total_cost_usd, 2)                       AS total_cost_usd,
-    ROUND(vs_baseline_usd, 2)                      AS saving_vs_baseline_usd,
-    ROUND(vs_baseline_pct, 1)                      AS saving_pct,
-    ROUND(cost_per_unit_served, 4)                 AS cost_per_unit_served,
-    CASE
-        WHEN scenario = 'Baseline'
-             THEN 'Unoptimised — cross-lane avg \$4.20/unit'
-        ELSE      'Optimised — home-lane \$1.545/unit'
-    END                                            AS routing_strategy
-FROM pbi_cost_summary
+    fs.region AS region,
+    fs.category AS category,
+    ROUND(fs.total_forecast_units, 2) AS total_forecast_units,
+    ROUND(fs.avg_lower_pi, 2) AS avg_lower_pi,
+    ROUND(fs.avg_upper_pi, 2) AS avg_upper_pi
+FROM forecast_summary fs
 ORDER BY
-    total_cost_usd DESC;
--- Expected saving: 63.2% weekly shipping cost reduction
--- Pareto note: Scenarios A, B, C identical — network already optimal
-
-
--- ============================================================
--- Q8: SERVICE LEVEL COMPLIANCE BY SEGMENT
--- ============================================================
--- Business purpose:
---   Confirm all 24 region-category segments meet fill rate targets.
---   Zero tolerance for SL breaches on A-class categories.
---   ELECTRONICS (98% SL) and TOYS (95% SL) are highest priority.
---
--- Expected output: 24 rows
---   All 24 rows: compliance_status = 'COMPLIANT'
---   breach_flag = 0 for all rows
---   0 breaches confirmed by LP optimizer (status=OPTIMAL)
--- ============================================================
-
-SELECT
-    region,
-    category,
-    ROUND(fill_rate_pct, 2)                        AS fill_rate_pct,
-    target_sl_pct,
-    ROUND(fill_rate_pct - target_sl_pct, 2)        AS sl_gap,
-    breach_flag,
-    status,
-    CASE
-        WHEN breach_flag = 0  THEN 'COMPLIANT'
-        ELSE                       'BREACH — ACTION REQUIRED'
-    END                                            AS compliance_status,
-    CASE
-        WHEN category = 'ELECTRONICS'  THEN 'A-class — 98% target'
-        WHEN category = 'TOYS'         THEN 'A-class — 95% target'
-        WHEN category = 'BEAUTY'       THEN 'C-class — 95% target'
-        WHEN category IN ('HOME',
-                          'KITCHEN')   THEN 'B/C-class — 92% target'
-        ELSE                                'B-class — 90% target'
-    END                                            AS sl_priority
-FROM service_level_breach_report
-ORDER BY
-    sl_gap ASC,
-    category ASC;
--- Expected: all 24 rows COMPLIANT (0 breaches confirmed)
--- LP optimizer status=OPTIMAL for all 3 scenarios
-
-
--- ============================================================
--- END OF SUPPLY CHAIN QUERIES
--- 8 queries covering: demand, revenue, promotions, overstock,
--- forecast accuracy, safety stock, LP scenarios, service level
--- ============================================================
+    fs.total_forecast_units DESC,
+    fs.region ASC,
+    fs.category ASC;
