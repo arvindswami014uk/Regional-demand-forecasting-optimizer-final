@@ -1,0 +1,2 @@
+timestamp,fallback_used,prophet_mae,prophet_rmse,prophet_wape_pct,prophet_r2,lgbm_mae,lgbm_rmse,lgbm_wape_pct,lgbm_r2,lgbm_beats_prophet_mae_pct,lgbm_beats_prophet_wape_pct,total_weeks,train_weeks,test_weeks,narrative
+2026-04-23 18:21:03 UTC,False,8603.55,9402.89,426.13,-67.9571,33.37,50.13,21.5,0.7554,99.6,95.0,81,56,25,"LightGBM outperforms Prophet by 99.6% on MAE, confirming feature-rich gradient boosting captures promotional lift and 27-lag structure better than Prophet additive decomposition on this dataset."

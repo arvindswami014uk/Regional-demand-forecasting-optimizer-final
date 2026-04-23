@@ -1,0 +1,5 @@
+model,mae,rmse,wape,r2,notes
+LightGBM (CV),33.37,50.13,21.5,0.7554,production model
+Prophet,8603.55,9402.89,426.13,-67.9571,"LightGBM outperforms Prophet by 99.6% on MAE, confirming feature-rich gradient boosting captures promotional lift and 27-lag structure better than Prophet additive decomposition on this dataset."
+Naive,44.49,62.2,69.9,-1.91,baseline
+Linear Reg,141.21,182.43,221.9,-24.03,failed benchmark
